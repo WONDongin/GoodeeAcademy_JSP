@@ -1,0 +1,22 @@
+package model;
+
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+public class DBConnection {
+	private DBConnection() {}
+	public static Connection getConnection() {
+		Connection conn = null;
+		try {
+			Class.forName("org.mariadb.jdbc.Driver");
+			conn = DriverManager.getConnection
+					("jdbc:mariadb://localhost:3306/gdjdb","gduser","1234");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return conn;
+	}
+	
+}

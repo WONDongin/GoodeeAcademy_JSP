@@ -1,0 +1,11 @@
+package model.member;
+
+public class Meber {
+	private String id;
+	private String pass;
+	private String name;
+	private int gender;
+	private String tel;
+	private String email;
+	private String picture;
+}

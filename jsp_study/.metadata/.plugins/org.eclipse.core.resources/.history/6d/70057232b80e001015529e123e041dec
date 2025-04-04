@@ -1,0 +1,19 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!-- 
+1. jspStudy 프로젝트 생성
+2. /webapp/ex01_directive 폴더 생성
+3. ex01_directive 폴더에 jsp 파일 생성
+   파일 이름	 : ex01_pageDirective.jsp
+--> 
+<!-- 해당 파일 : /jspStudy/src/main/webapp/ex01_directive/ex01_pageDirective.jsp -->  
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	</head>
+	<body>
+	
+	</body>
+</html>

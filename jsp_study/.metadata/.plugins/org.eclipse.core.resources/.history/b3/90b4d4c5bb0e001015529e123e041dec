@@ -1,0 +1,18 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!--/webapp/ex01_directive/ex02_includeDirective.jsp -->
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	</head>
+	<body>
+	<% 
+		String msg = "ex02_includeDirective.jsp 페이지의 msg 변수";
+	%>
+	<h1>ex02_inclubeDirective.jsp 입니다.</h1>
+	<%@ include file="ex02_inclubDirective2.jsp" %>
+	
+	</body>
+</html>

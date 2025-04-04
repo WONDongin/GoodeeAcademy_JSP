@@ -1,0 +1,3 @@
+creat table member(
+
+)

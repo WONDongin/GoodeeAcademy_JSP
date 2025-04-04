@@ -1,0 +1,41 @@
+<%@page import="java.sql.ResultSetMetaData"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Connection"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>jdbc 예제1</title>
+	<link rel="stylesheet" href="/jspStudy/css/main.css">
+	</head>
+	<body>
+	<%
+		Class.forName("org.mariadb.jdbc.Driver");
+		Connection conn = DriverManager.getConnection
+				("jdbc:mariadb://localhost:3306/gdjdb","gduser","1234");
+		PreparedStatement psmt = conn.prepareStatement
+				("select * from professor");
+		ResultSet rs = psmt.executeQuery();
+		ResultSetMetaData rsmt = rs.getMetaData();
+	%>
+	<table>
+		<tr>
+		<% 
+		for(int i=1; i<=rsmt.getColumnCount(); i++){ 
+		%>
+		<th><%= rsmt.getColumnClassName(i) %></th><% } %></tr>
+		
+		<% while(rs.next()){ %><tr>
+		<% for(int i=1; i<=rsmt.getColumnCount(); i++){ %>
+		<td><%= rs.getString(i) %></td>
+		<% } %><tr><% } %>
+
+		
+		
+	</table>
+	</body>
+</html>

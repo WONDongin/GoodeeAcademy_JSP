@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!-- /webapp/ex03_parameter/client.html -->
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>Client</title>
+	</head>
+	<body>
+		<ul>
+			<li><a href="http://localhost:8080/servletStudy/GetServlet">이동하기1</a></li>
+			<li><a href="/servletStudy/GetServlet">이동하기2</a></li>
+			<!-- url에서 /로 시작하면 톰캣은 ContextPath로 인식  -->
+			<li><a href="/GetServlet">이동하기3(오류)</a></li>
+			<li><a href="GetServlet">이동하기4</a></li>
+			<!-- 
+			   http://localhost:8080/servletStudy/ex03_parameter/client.html
+			=> http://localhost:8080/servletStudy/ex03_parameter/GetServlet 요청
+			urlmapping HTML 경로에 따라서 실행 여부가 달라짐
+			-->
+		</ul>
+		<div>
+			<a href="/servletStudy/GetServlet?model=냉장고&price=200">파라미터 전송</a>
+		</div>
+		<div>
+			<form action="/servletStudy/GetServlet">
+				<!-- name: 파라미터값 -->
+				<label for="model">모델명</label>
+				<input type="text" id="model" name="model" placeHolder="모델명">
+				<label for="price">가격</label>
+				<input type="text" id="price" name="price" placeHolder="가격(원)">
+				<button type="submit">파라미터 전송</button>
+			</form>
+		</div>
+		<hr/>
+		<h3>Post 방식으로 전송</h3>
+		<div>
+			<form action="/servletStudy/PostServlet" method ="POST">
+				<label for="model">모델명</label>
+				<input type="text" id="model" name="model" placeHolder="모델명">
+				<label for="price">가격</label>
+				<input type="text" id="price" name="price" placeHolder="가격(원)">
+				<button type="submit">파라미터 전송</button>
+			</form>
+		</div>
+	</body>
+</html>

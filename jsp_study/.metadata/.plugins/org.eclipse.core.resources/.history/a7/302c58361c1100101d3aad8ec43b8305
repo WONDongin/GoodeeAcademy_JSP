@@ -1,0 +1,35 @@
+package model2;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+
+
+public class MemberDao {
+	public boolean insert(Member mem) {
+		Connection conn = DBConnection.getConnection();
+		PreparedStatement pstmt = null;
+		String sql = "insert into member (id,pass,name,gender,tel,email,picture)"
+				+ " values (?,?,?,?,?,?,?)";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mem.getId());
+			pstmt.setString(2, mem.getId());
+			pstmt.setString(3, mem.getPass());
+			pstmt.setInt(4, mem.getGender());
+			pstmt.setString(5, mem.getTel());
+			pstmt.setString(6, mem.getEmail());
+			pstmt.setString(7, mem.getPicture());
+			if(pstmt.executeUpdate() > 0) return true;
+			else return false; 	
+
+		}
+		catch (SQLException  e) {
+			e.printStackTrace();
+		}finally {
+			DBConnection.close(conn,pstmt,null);
+		}
+		return false;
+	}
+}

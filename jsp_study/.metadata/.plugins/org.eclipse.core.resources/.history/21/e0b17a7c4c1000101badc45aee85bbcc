@@ -1,0 +1,20 @@
+<%@page import="com.oreilly.servlet.MultipartRequest"%>
+<%@page import="java.io.File"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>upload 결과보기</title>
+	</head>
+	<body>
+		<%
+		String readPath = request.getServletContext().getRealPath("upload");
+		File dir = new File(realPath);
+		if(!dir.exists()) dir.mkdirs();
+		MultipartRequest multi = new MultipartRequest(
+				)
+		%>
+	</body>
+</html>

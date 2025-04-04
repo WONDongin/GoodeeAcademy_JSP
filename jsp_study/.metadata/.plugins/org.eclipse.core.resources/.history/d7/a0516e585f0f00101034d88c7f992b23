@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<!-- /webapp/ex03_comment/ex01_comment.jsp -->  
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>request 객체 예제</title>
+	</head>
+	<body>
+		<h2>request 객체 : 클라이언트의 요청 정보를 저장하고 있는 객체</h2>
+		<form action="ex01_request.jsp" method="post">
+		이름:<input type="text" name="name"><br/>
+		나이:<input type="text" name="age"><br/>
+		성별:<input type="radio" name="gender" value="1">남
+			<input type="radio" name="gender" value="2">여<br/>
+		취미:<input type="checkbox" name="hobby" value="여행">여행
+			<input type="checkbox" name="hobby" value="요리">요리
+			<input type="checkbox" name="hobby" value="독서">독서
+			<input type="checkbox" name="hobby" value="축구">축구
+		출생년도:<select name="year">
+		<option>1995</option><option>1995</option><option>1995</option>
+		<option>1995</option><option>1995</option><option>1995</option>
+		<option>1995</option><option>1995</option><option>1995</option>
+		</select>
+		<input type="submit" value="전송">
+		</form>
+	</body>
+</html>

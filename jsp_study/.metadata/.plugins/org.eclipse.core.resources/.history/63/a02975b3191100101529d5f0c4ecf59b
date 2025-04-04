@@ -1,0 +1,34 @@
+package model;
+
+
+import java.beans.Statement;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+
+public class DBConnection {
+	private DBConnection() {}
+	public static Connection getConnection() {
+		Connection conn = null;
+		try {
+			Class.forName("org.mariadb.jdbc.Driver");
+			conn = DriverManager.getConnection
+					("jdbc:mariadb://localhost:3306/gdjdb","gduser","1234");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return conn;
+	}
+	
+	public static void close(Connection conn, Statement stmt, ResultSet rs) {
+		try {
+			if(rs != null) rs.close();
+			if(stmt != null) stmt.close();
+			if(conn != null) conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+}

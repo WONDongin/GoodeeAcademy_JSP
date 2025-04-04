@@ -1,0 +1,61 @@
+package ex01_lifecycle;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class HelloServlet
+ * 1. ex01_lifecycle 패키지생성
+ * 2. new > servelet
+ * 	  servlet name : HelloServlet
+ */
+@WebServlet("/HelloServlet")
+public class HelloServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     1. 생성자
+     1) 가장먼저 호출
+     
+     */
+    public HelloServlet() {
+        super();
+        System.out.println("생성자 호출");
+    }
+    
+    
+    
+
+	@Override
+	protected void service(HttpServletRequest req, HttpServletResponse resq) throws ServletException, IOException {
+		 System.out.println("service 메서드 호출");
+		 switch(req.getMethod()) {
+		 case "GET" : doGet(req,resq); break;
+		 case "POST" : doPost(req,resq); break;
+		 }
+	}
+
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		System.out.println("doGet 메서드 호출");
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		System.out.println("doPost 메서드 호출");
+		doGet(request, response);
+	}
+
+}

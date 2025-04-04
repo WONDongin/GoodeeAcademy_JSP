@@ -1,0 +1,19 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%-- /webapp/ex01_script/ex01_script.jsp --%>
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>script 예제</title>
+	</head>
+	<body>
+		<h1>스크립트의 종류</h1>
+		<ol>
+			<li>스크립트릿(scriptlet) : &lt;% ... %&gt; : 자바 소스의 영역</li>
+			<li></li>
+			<li></li>
+		</ol>
+		<h1>스크립트릿 : _jspService() 메서드 소스에 설정됨.</h1>
+	</body>
+</html>

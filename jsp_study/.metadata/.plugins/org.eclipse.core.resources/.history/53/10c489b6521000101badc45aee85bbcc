@@ -1,0 +1,49 @@
+<%@page import="java.text.DecimalFormat"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
+<%@page import="com.oreilly.servlet.MultipartRequest"%>
+<%@page import="java.io.File"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>upload 결과보기</title>
+	</head>
+	<body>
+		<%
+		// request.getServletContext() : application 객체
+		// String realPath = request.getServletContext().getRealPath("upload");
+		// realPath : 업로드 되는 위치
+		// D:\java\jsp_study\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\jspStudy\
+		String realPath = application.getRealPath("upload");
+		File dir = new File(realPath);
+		if(!dir.exists()) dir.mkdirs();
+		MultipartRequest multi = new MultipartRequest(
+				request,realPath,1024*1024*10,"UTF-8", new DefaultFileRenamePolicy());
+		String uploader = multi.getParameter("uploader");
+		
+		String originName = multi.getOriginalFileName("filename");
+		String fileSystemName = multi.getFilesystemName("filename");
+		File file = multi.getFile("filename");
+		String name = file.getName();
+		String parent = file.getParent();
+		
+		String lastModified =
+				new SimpleDateFormat("yyy-MM-dd").format(file.lastModified());
+		String size = new DecimalFormat("#,##0").format(
+				fileSystemName.length() / 1024 + (file.length() % 1024 == 0 ?0:1));
+		%>
+		
+		<ul style="list-style-type: circle; font-size:24px">
+			<li>작성자 : <%= uploader %></li>
+			<li>월래업로드파일명 : <%= originName %></li>
+			<li>저장된 업르도 파일명 : <%= fileSystemName %></li>
+			<li>파일명 : <%= name %></li>
+			<li>최종수정일 : <%= lastModified %></li>
+			<li>파일크기 : <%= size %>KB</li>
+			<img src="/jspStudy/upload/<%= fileSystemName %>">
+		</ul>
+	</body>
+</html>

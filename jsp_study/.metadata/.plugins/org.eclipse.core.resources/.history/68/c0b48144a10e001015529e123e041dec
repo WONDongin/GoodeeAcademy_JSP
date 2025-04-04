@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<!-- /webapp/ex03_parameter/client.html -->
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	</head>
+	<body>
+		<ul>
+			<li><a href="http://localhost:8080/servletStudy/GetServlet">이동하기</a></li>
+		</ul>
+		<div>
+			<a href="/servletStudy/GetServlet?model=냉장고&price=200">파라미터 전송</a>
+		</div>
+	</body>
+</html>

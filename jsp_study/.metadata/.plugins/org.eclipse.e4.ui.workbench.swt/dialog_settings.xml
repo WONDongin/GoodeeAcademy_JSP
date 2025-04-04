@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="ShowViewDialog">
+		<item key="ShowViewDialog.STORE_SELECTED_VIEW_ID" value="org.eclipse.datatools.connectivity.DataSourceExplorerNavigator"/>
+		<item key="DIALOG_X_ORIGIN" value="278"/>
+		<item key="DIALOG_Y_ORIGIN" value="227"/>
+		<item key="DIALOG_WIDTH" value="418"/>
+		<item key="DIALOG_HEIGHT" value="439"/>
+		<item key="DIALOG_FONT_NAME" value="1|Fira Code Medium|9.0|0|WINDOWS|1|-12|0|0|0|500|0|0|0|0|3|2|1|1|Fira Code Medium"/>
+		<list key="ShowViewDialog.STORE_EXPANDED_CATEGORIES_ID">
+			<item value="Data Management"/>
+		</list>
+	</section>
+</section>

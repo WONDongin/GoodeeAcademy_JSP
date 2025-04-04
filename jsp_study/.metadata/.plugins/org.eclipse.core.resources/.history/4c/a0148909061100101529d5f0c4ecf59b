@@ -1,0 +1,29 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>회원가입</title>
+	<link rel="stylesheet" href="../css/main.css">
+	</head>
+	<body>
+		<form action="join.jsp" name="f" method="post" onsubmit="return input_check(this)">
+			<input type="hidden" name="picture" value="">
+			<table>
+				<tr>
+					<td rowspan="4" valign="bottom">
+						<img src="" width="100" height="120" id="pic"><br/>
+						<font size="1"><a href="javascript:win_ipload()">사진등록</a></font>
+					</td>
+				
+					<th>아이디</th>
+					<td><input type="text" name="id"></td>
+					<button type="button" onclick="inchk()">중복검색</button>
+					</td>
+				
+				</tr>
+			</table>
+		</form>
+	</body>
+</html>

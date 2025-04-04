@@ -1,0 +1,27 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>전송된 파라미터 값 출력</title>
+	</head>
+	<body>
+		<%
+		// 파라미터 데이터의 인코딩 설정. 처음에 실행해야 함
+		request.setCharacterEncoding("UTF-8");
+		String name = request.getParameter("name");
+		String age = request.getParameter("age");
+		String gender = request.getParameter("gender");
+		String hobby = request.getParameter("hobby");
+		String year = request.getParameter("year");
+		%>
+		
+		이름 : <%= name %><br/>
+		나이 : <%= age %><br/>
+		성별 : <%= gender.equals("1") ? "남" : "여" %><br/>
+		취미 : <%= hobby %><br/>
+		출생년도 : <%= year %><br/>
+		<hr/>
+	</body>
+</html>

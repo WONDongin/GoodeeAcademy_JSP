@@ -1,0 +1,17 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!-- /webapp/ex04_request/ex01_requestFrom.jsp --> 
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>response : 응답객체</title>
+	</head>
+	<body>
+		<h1>
+		response 객체는 브라우저에 전달되는 객체라 이해 하면 된다.<br/>
+		내부에 출력 버퍼를 가지고 있어서, 브라우저에 전달되는 내용을 저장하고 있다.
+		</h1>
+		
+	</body>
+</html>

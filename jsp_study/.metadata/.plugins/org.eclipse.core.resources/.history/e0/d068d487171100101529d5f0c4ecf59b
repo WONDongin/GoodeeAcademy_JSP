@@ -1,0 +1,5 @@
+package medel;
+
+public class DBConnection {
+
+}

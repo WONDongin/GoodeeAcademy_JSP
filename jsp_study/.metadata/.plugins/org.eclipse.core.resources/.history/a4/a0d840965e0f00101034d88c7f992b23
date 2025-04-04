@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<!-- /webapp/ex03_comment/ex01_comment.jsp -->  
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>request 객체 예제</title>
+	</head>
+	<body>
+		<h2>request 객체 : 클라이언트의 요청 정보를 저장하고 있는 객체</h2>
+	</body>
+</html>

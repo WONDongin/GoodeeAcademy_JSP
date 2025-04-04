@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="NewWizardAction">
+		<item key="NewWizardSelectionPage.STORE_SELECTED_ID" value="org.eclipse.jdt.ui.wizards.NewPackageCreationWizard"/>
+		<list key="NewWizardSelectionPage.STORE_EXPANDED_CATEGORIES_ID">
+			<item value="org.eclipse.jdt.ui.java"/>
+		</list>
+		<section name="NewWizard.dialogBounds">
+			<item key="DIALOG_X_ORIGIN" value="181"/>
+			<item key="DIALOG_Y_ORIGIN" value="215"/>
+			<item key="DIALOG_WIDTH" value="613"/>
+			<item key="DIALOG_HEIGHT" value="500"/>
+			<item key="DIALOG_FONT_NAME" value="1|Fira Code Medium|9.0|0|WINDOWS|1|-12|0|0|0|500|0|0|0|0|3|2|1|1|Fira Code Medium"/>
+		</section>
+	</section>
+	<section name="WorkbenchPreferenceDialog.dialogBounds">
+		<item key="DIALOG_X_ORIGIN" value="7"/>
+		<item key="DIALOG_Y_ORIGIN" value="157"/>
+		<item key="DIALOG_WIDTH" value="925"/>
+		<item key="DIALOG_HEIGHT" value="754"/>
+		<item key="DIALOG_FONT_NAME" value="1|Fira Code Medium|9.0|0|WINDOWS|1|-12|0|0|0|500|0|0|0|0|3|2|1|1|Fira Code Medium"/>
+	</section>
+	<section name="org.eclipse.ui.preferences.keysPreferencePage">
+		<item key="actionSetFilter" value="true"/>
+		<item key="internalFilter" value="true"/>
+		<item key="uncategorizedFilter" value="true"/>
+	</section>
+</section>

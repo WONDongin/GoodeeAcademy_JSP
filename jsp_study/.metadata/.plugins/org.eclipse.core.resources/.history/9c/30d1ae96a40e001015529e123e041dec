@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<!-- /webapp/ex03_parameter/client.html -->
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>Client</title>
+	</head>
+	<body>
+		<ul>
+			<li><a href="http://localhost:8080/servletStudy/GetServlet">이동하기</a></li>
+		</ul>
+		<div>
+			<a href="/servletStudy/GetServlet?model=냉장고&price=200">파라미터 전송</a>
+		</div>
+		<div>
+			<form action="/servletStudy/GetServlet">
+				<label for="model">모델명</label>
+				<!-- name: 파라미터값 -->
+				<input type="text" id="model" name="model" placeHolder="모델명">
+				<label for="price">가격</label>
+				<input type="text" id="price" name="price" placeHolder="가격(원)">
+				<button type="submit">파라미터 전송</button>
+			</form>
+		</div>
+	</body>
+</html>

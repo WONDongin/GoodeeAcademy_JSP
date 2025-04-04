@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<!-- /webapp/ex03_parameter/client.html -->
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	</head>
+	<body>
+		<ul>
+			<li><a href="http://localhost:8080/servletStudy/GetServlet"></a></li>
+		</ul>
+	</body>
+</html>

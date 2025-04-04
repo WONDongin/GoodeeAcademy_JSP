@@ -1,0 +1,16 @@
+package model.member;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
+public class MemberDao {
+	public boolean insert(Member mem) {
+		Connection conn = dbconnection.getConnection();
+		PreparedStatement pstmt = null;
+		String sqlString = "insert into member (id,pass,name,gender,tel,email,picture)"
+				+ "values (?,?,?,?,?,?,?,)";
+		try {
+			pstmt = conn
+		}
+	}
+}

@@ -1,0 +1,23 @@
+
+<%@page import="model.member.Member"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>\
+<%--
+=>joinForm.jsp 에서 입력된 값을 database member 테이블에 등록하기
+1. 파라미터 값을 Member 클래스의 객체에 저장
+2. Member 객체를 db에 insert 하기
+3. 회원가입 성공 : loginForm.jsp 페이지로 이동
+   회원가입 실패 : joinForm.
+--%>
+<% 
+request.setCharacterEncoding("UTF-8");
+Member mem = new Member();
+mem.setId(request.getParameter("id"));
+mem.setPass(request.getParameter("pass"));
+mem.setName(request.getParameter("name"));
+mem.setGender(Integer.parseInt(request.getParameter("gender")));
+mem.setId(request.getParameter("tel"));
+mem.setId(request.getParameter("email"));
+mem.setId(request.getParameter("prcture"));
+	
+%>

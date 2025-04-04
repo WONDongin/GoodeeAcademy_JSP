@@ -1,0 +1,18 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>회원가입</title>
+	<link rel="stylesheet" href="../css/main.css">
+	</head>
+	<body>
+		<form action="join.jsp" name="f" method="post" onsubmit="return input_check(this)">
+			<input type="hidden" name="picture" value="">
+			<table>
+				<tr><td rowspan="4"></td></tr>
+			</table>
+		</form>
+	</body>
+</html>

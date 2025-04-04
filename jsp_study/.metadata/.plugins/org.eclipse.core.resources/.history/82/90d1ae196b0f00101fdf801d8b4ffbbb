@@ -1,0 +1,14 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+	<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>도시조회</title>
+	</head>
+	<body>
+		<select id="city">
+			<option value="seoul">서울</option><option value="busan">부산</option>
+		</select>
+	</body>
+</html>

@@ -1,0 +1,15 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	</head>
+	<body>
+		<h3>session에 등록된 날짜를 조회하고, session 속성에서 제거하기</h3>
+		<% 
+		
+		%>
+	</body>
+</html>

@@ -1,0 +1,46 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>파일 업로드</title>
+	</head>
+	<body>
+<%-- 
+enctype="multipart/form-data" : 파일 업로드시 선택된 파일의 내용도 함께 서버로 전송하도록 설정
+method="post"로 무조건 설정해야 함.
+=> 파일 업로드시 <form enctype="multipart/form-data" method="post:...>로 설정해야 함
+
+
+파일내용까지 보내기위해 저 모드 사용하고, 그걸
+body 부분에 보내야 하는 파일의 내용을 전달하기위해서, post 방식을 쓴다.
+
+--%>
+<%--
+ex01_upload.jsp 요청시 multipart/form-data 설정인 경우 request 객체 파라미터 처리 못함
+1개의 파라미터의 1개의 파일 정보를 가지고 요청
+
+uploader 파라미터
+filename 파일정보 + 파일의 내용
+--%>
+		<div>
+		<form id="frm_upload" action="ex01_upload.jsp" 
+		method="post" enctype="multipart/form-data">
+			<div>
+				<label for="uploader">작성자</label>
+				<input type="text" id="uploader" name="uploader">
+			</div>
+			<div>
+				<label for="filename">파일첨부</label>
+				<input type="file" id="filename" name="filename">
+			</div>
+			<%-- <button> 태그의 기본 타입은 submit --%>
+			<div>
+				<button>첨부하기</button>
+				<input type="reset" value="다시작성">
+			</div>
+		</form>
+		</div>
+	</body>
+</html>

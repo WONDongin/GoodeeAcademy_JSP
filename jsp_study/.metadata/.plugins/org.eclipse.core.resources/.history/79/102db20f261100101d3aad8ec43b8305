@@ -1,0 +1,21 @@
+package model.test0404;
+
+public class Book {
+	private String writer;
+	private String pass;
+	private String name;
+	private int gender;
+	private String tel;
+	private String email;
+	private String picture;
+	
+	//getter,setter, toString
+
+	@Override
+	public String toString() {
+		return "Member [id=" + id + ", pass=" + pass + ", name=" + name + ", gender=" + gender + ", tel=" + tel
+				+ ", email=" + email + ", picture=" + picture + "]";
+	}
+	
+	
+}

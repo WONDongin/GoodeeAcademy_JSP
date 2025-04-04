@@ -1,0 +1,32 @@
+package model.test0404;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import model.DBConnection;
+
+public class BookDao {
+	 public boolean insert(Book book) {
+		 Connection conn = DBConnection.getConnection();
+		 PreparedStatement pstmt = null;
+		 String sql = "insert into member (writer,title,content)"
+				 + " values (?,?,?)";
+		 try {
+			 pstmt = conn.prepareStatement(sql);
+			 //pstmt.setString(1,값) => sql의 첫번째 ?에 해당하는 값을 String 형태로 설정
+			 pstmt.setString(1, book.getWriter());//joinForm.jsp에서 아이디로 입력된값
+			 pstmt.setString(2, book.getPass());//joinForm.jsp에서 비밀번호로 입력된값
+			 pstmt.setString(3, book.getName());//joinForm.jsp에서 이름으로 입력된값
+			
+			 //executeUpdate() : 실행 후 변경된 레코드의 갯수 리턴 
+			 if(pstmt.executeUpdate() > 0) return true;
+			 else return false;
+		 } catch(SQLException e) {
+			 e.printStackTrace();
+		 } finally {
+			 DBConnection.close(conn,pstmt,null);
+		 }
+		 return false;
+	 }
+}
