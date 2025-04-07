@@ -1,6 +1,6 @@
 package model.test0404;
 
-public class Book {
+public class Book { //Been
 	private String writer;
 	private String title;
 	private String content;

@@ -68,7 +68,7 @@
 					f.name.focus();
 					return false; // 기존 이벤트 취소
 				}
-				return truel;
+				return true;
 			}
 		</script>
 	</body>

@@ -2,7 +2,11 @@ package model.member;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import model.DBConnection;
 
@@ -31,5 +35,65 @@ public class MemberDao {
 			 DBConnection.close(conn,pstmt,null);
 		 }
 		 return false;
+	 }
+	 
+	 public Member selectOne(String id) {
+		 // id : loginForm.jsp 에서 입력한 아이디값
+		 Connection conn = DBConnection.getConnection();
+		 String sql = "select * from member where id = ?";
+		 PreparedStatement pstmt = null;
+		 ResultSet rs = null;
+		 try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) { // id에 해당하는 레코드가 존재
+				Member mem = new Member();
+				mem.setId(rs.getString("id")); // rs.getString("컬럼명")
+				mem.setPass(rs.getString("pass"));
+				mem.setName(rs.getString("name"));
+				// rs.getInt("gender") : gender컬럼의 값을 int 형태로 처리
+				mem.setGender(rs.getInt("gender"));
+				mem.setTel(rs.getString("tel"));
+				mem.setEmail(rs.getString("email"));
+				mem.setPicture(rs.getString("picture"));
+				return mem;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBConnection.close(conn, pstmt, rs);
+		}
+		return null;
+	 }
+	 
+	 public List<Member> list(){
+		 Connection conn = DBConnection.getConnection();
+		 String sql = "select * from member";
+		 PreparedStatement pstmt = null;
+		 ResultSet rs = null;
+		 List<Member> list = new ArrayList<>();
+		 try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				Member mem = new Member();
+				mem.setId(rs.getString("id"));
+				mem.setPass(rs.getString("pass"));
+				mem.setName(rs.getString("name"));
+				mem.setGender(rs.getInt("gender"));
+				mem.setTel(rs.getString("tel"));
+				mem.setEmail(rs.getString("email"));
+				mem.setPicture(rs.getString("picture"));
+				list.add(mem);
+				
+			}
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBConnection.close(conn, pstmt, rs);
+		}
+		 return null;
 	 }
 }

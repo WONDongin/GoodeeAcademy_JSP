@@ -12,7 +12,7 @@
    회원가입 실패 : joinForm.
 --%>
 <%
-	//1
+	// 1. 파라미터 값을 Member 클래스에 저장 
 	request.setCharacterEncoding("UTF-8");
 	// Member 객체 : 파라미터의 갯수와 같은 프로퍼티를 가진 Bean 클래스
 	// Dto : 데이터를 DB에 전달하기 위한 객체
@@ -33,9 +33,9 @@
 	String url = "joinForm.jsp";
 	
 	// boolean insert(Member)
-	if(dao.insert(mem)){ // t d
+	if(dao.insert(mem)){ // true : db에 등록완료
 		msg = "회원가입성공";
-		url = "loginForm.jsp";
+		url = "loginForm.jsp"; // 다음 페이지를 설정
 	}
 %>
 
