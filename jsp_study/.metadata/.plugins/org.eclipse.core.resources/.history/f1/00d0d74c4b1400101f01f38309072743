@@ -1,0 +1,53 @@
+<%@page import="model.member.MemberDao"%>
+<%@page import="java.lang.reflect.Member"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%-- /webapp/member/pw.jsp
+  1. 파라미터 저장.
+  2. db에서 id,email과 tel 을 이용하여 pass값을 리턴
+       pass = MemberDao.pwSearch(id,email,tel)
+  3. 비밀번호 검증 
+     비밀번호 찾은 경우 :화면에 앞 두자리는 **로 표시하여 화면에 출력. 닫기버튼 클릭시 
+                     현재 화면 닫기
+     비밀번호 못찾은 경우: 정보에 맞는 비밀번호를 찾을 수 없습니다.  메세지 출력후
+                     현재 페이지를 pwForm.jsp로 페이지 이동. 
+--%>
+<% 
+	String id = request.getParameter("id");
+	String email = request.getParameter("email");
+	String tel = request.getParameter("tel");
+	
+	String pass = new MemberDao().pwSearch(id,email,tel);
+	if(pass == null){
+%>
+<script type="text/javascript">
+	alert("정보에 맞는 비밀번호를 찾을 수 없습니다.");
+	location.href="pwForm.jsp";
+</script>
+<% } else { %>
+
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>아이디 찾기</title>
+	</head>
+	<body>
+		<table>
+			<tr><th>아이디</th><td><%= id.substring(0,id.length()-2) + "**" %></td></tr>
+			<tr>
+				<td colspan="2">
+					<input type="button" value="아이디전송" onclick="idsend('<%= id.substring(0,id.length()-2) %>')">
+				</td>
+			</tr>
+		</table>
+		<script type="text/javascript">
+			function idsend(id){ // id : 실제 id에서 뒤의 2자리를 제외한 값
+				// opener : loginForm.jsp
+				opener.document.f.id.value = id; // loginForm.jsp 페이지에 id값 입력.
+				self.close(); // 현재 페이지를 닫기
+			}
+		</script>
+	</body>
+</html>
+<% } %>

@@ -1,0 +1,17 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%-- 
+1. session 의 login 정보제거
+2. loginForm.jsp 페이지 이도
+
+--%>
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>로그아웃</title>
+	</head>
+	<body>
+	
+	</body>
+</html>

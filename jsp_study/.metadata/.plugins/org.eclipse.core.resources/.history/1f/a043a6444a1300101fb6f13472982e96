@@ -1,0 +1,18 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+<%-- 
+1. 파라미터값을 조회.
+2. db에서 입력된 아이디에 해당하는 레코드를 읽어서 Member 객체에 저장
+3. db에서 조회된 내용과 입력된 내용을 비교
+--%>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>로그인</title>
+	</head>
+	<body>
+	
+	</body>
+</html>

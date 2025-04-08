@@ -1,0 +1,20 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%--
+1. id 파라미터 조회
+2. 로그인 상태 검증
+	- 로그아웃 : 로그인하세요 메세지 출력. loginForm.jsp 페이지 이동
+	- 로그인 상태
+		- 다른 id 정보를 변경불가(관리자는 가능)
+		=> 내 정보만 수정 가능. main.jsp 페이지 이동
+--%>
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title></title>
+	</head>
+	<body>
+	
+	</body>
+</html>

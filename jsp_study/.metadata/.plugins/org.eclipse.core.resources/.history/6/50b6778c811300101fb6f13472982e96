@@ -1,0 +1,40 @@
+<%@page import="model.member.MemberDao"%>
+<%@page import="model.member.Member"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%--
+1. 모든 파라미터를 Member 객체에 저장하기
+2. 입력된 비밀번호와 db에 저장된 비밀번호 비교.
+	관리자인 경우 관리자비밀번호로 비교
+	불일치 : '비밀번호 오류' 메세지 출력 후 updateForm.jsp 페이지 이동
+3. Member 객체의 내용으로 db를 수정하기 : boolean MemberDao.update(Member)
+	- 성공 : 회원정보 수정 완료 메세지 출력 후 info.jsp로 페이지 이동
+	- 실패 : 회원정보 수정 실패 메세지 출력 후 updateForm.jsp  페이지 이동
+--%>
+<%
+	String login = (String) session.getAttribute("login"); // 로그인 정보
+	String id = request.getParameter("id"); // 파라미터 정보
+	Member mem = new MemberDao().selectOne(id);
+	
+
+%>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	</head>
+	<body>
+	<table>
+		<caption>회원정보</caption>
+			<tr><td rowspan="6" width="30%">
+			<img src="picture/<%= mem.getPicture() %>" width="200" height="210"></td>
+			<th width="20%">아이디</th><td><%= mem.getId() %></td>
+			<tr><th>이름</th><td><%= mem.getName() %></td>
+			<tr><th>성별</th><td><%= mem.getGender() == 1 ? "남" : "여" %></td>
+			<tr><th>전화</th><td><%= mem.getTel() %></td>
+			<tr><th>이메일</th><td><%= mem.getEmail() %></td>
+			</tr>
+		</table>
+	</body>
+</html>

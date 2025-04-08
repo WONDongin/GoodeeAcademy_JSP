@@ -1,0 +1,19 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+<%--
+1. 로그인 여부 검즘 => main.jsp 페이지는 로그인 상태에서만 조회가능
+--%>
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>회원관리</title>
+	</head>
+	<body>
+		<% String login = (String) session.getAttribute("login"); %>
+		<h3><%= login %>님이 로그인 하셨습니다.</h3>
+		<h3><a href="logout.jsp">로그아웃</a></h3>
+		<h3><a href="info.jsp?id=<%= login %>">회원 정보 보기</a></h3>
+	</body>
+</html>

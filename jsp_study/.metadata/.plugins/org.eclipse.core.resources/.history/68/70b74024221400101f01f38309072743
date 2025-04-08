@@ -1,0 +1,29 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%--
+
+--%>
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>회원사진등록</title>
+	</head>
+	<body>
+		<table>
+			<tr><td><img id="preview" src=""></td></tr>
+			<tr><td><form action="picture.jsp" method="post" enctype="multipart/form-data">
+				<input type="file" name="picture" id="imageFile" accept="img/*">
+				<input type="submit" value="사진등록">
+			</form></td></tr>
+		</table>
+		<script type="text/javascript">
+			let imagefile = document.querySelector('#imageFile');
+			let preview = document.querySelector('#preview');
+			imagefile.addEventListener('change', function(e){
+				let get_file = e.target.files;
+				let re
+			})
+		</script>
+	</body>
+</html>

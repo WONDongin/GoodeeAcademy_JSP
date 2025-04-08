@@ -1,0 +1,24 @@
+<%@page import="java.util.List"%>
+<%@page import="model.member.MemberDao"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>회원목록</title>
+	</head>
+	<body>
+		<table>
+			<caption>회원목록</caption>
+			<tr><th>아이디</th><th>사진</th><th>이름</th><th>성별</th><th>전화</th>
+			<th>&nbsp;</th></tr>
+			
+			<%
+			List<Member> list = new MemberDao().list();
+			
+			
+			%>
+		</table>
+	</body>
+</html>

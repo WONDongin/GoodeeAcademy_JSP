@@ -29,7 +29,7 @@
 				<td><%= application.getRealPath("/") %></td>
 			</tr>
 		</table>
-		<h3>application 객체는 applicatio 영역을 담당하는 객체임</h3>
+		<h3>application 객체는 application 영역을 담당하는 객체임</h3>
 		<% application.setAttribute("test", "application 객체 test"); %>
 	</body>
 </html>

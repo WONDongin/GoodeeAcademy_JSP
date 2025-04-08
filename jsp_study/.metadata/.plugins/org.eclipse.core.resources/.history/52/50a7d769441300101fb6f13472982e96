@@ -1,0 +1,16 @@
+create table book (
+	writer varchar(5) primary key,
+	title varchar(15),
+	content varchar(50)
+)
+
+select * from book
+
+drop table book
+
+create table book (
+	no int 
+	writer varchar(50),
+	title varchar(100),
+	content varchar(2000)
+)

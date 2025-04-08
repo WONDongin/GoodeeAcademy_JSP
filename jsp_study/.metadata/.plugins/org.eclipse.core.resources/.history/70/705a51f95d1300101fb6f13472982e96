@@ -1,0 +1,12 @@
+package sitemesh;
+/*
+
+1. sitemesh 패키지 생성
+2. SiteMeshFilter 클래스 파일생성
+
+sitemesh 기능 : 화면에 layout 페이지를 구현하여 jsp 페이지를 적용하는 프레임 워크
+
+*/
+public class SiteMeshFilter {
+
+}
