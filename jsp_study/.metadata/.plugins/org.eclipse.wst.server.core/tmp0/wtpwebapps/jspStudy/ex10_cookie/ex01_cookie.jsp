@@ -9,8 +9,8 @@
 	<body>
 		<%
 		Cookie cookie = new Cookie("name", "wondongin");
-		cookie.setMaxAge(600);
-		response.addCookie(cookie);
+		cookie.setMaxAge(600); // 유효시간
+		response.addCookie(cookie); // 클라이언트 전송
 		%>
 		<h2>
 		쿠키이름 : <%= cookie.getName() %><br/>

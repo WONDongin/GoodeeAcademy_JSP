@@ -1,0 +1,35 @@
+<%@page import="java.util.Enumeration"%>
+<%@page import="model.member.MemberDao"%>
+<%@page import="model.member.Member"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%--
+1. 모든 파라미터를 Member 객체에 저장하기
+2. 입력된 비밀번호와 db에 저장된 비밀번호 비교.
+	관리자인 경우 관리자비밀번호로 비교
+	불일치 : '비밀번호 오류' 메세지 출력 후 updateForm.jsp 페이지 이동
+3. Member 객체의 내용으로 db를 수정하기 : boolean MemberDao.update(Member)
+	- 성공 : 회원정보 수정 완료 메세지 출력 후 info.jsp로 페이지 이동
+	- 실패 : 회원정보 수정 실패 메세지 출력 후 updateForm.jsp  페이지 이동
+--%>
+<%
+	String login = (String) session.getAttribute("login"); // 로그인 정보
+	String id = request.getParameter("id"); // 파라미터 정보
+	Member mem = new MemberDao().selectOne(id);
+	
+	Enumeration e = request.getAttributeNames();
+	
+	
+
+%>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" href="../css/main.css">
+	</head>
+	<body>
+
+	</body>
+</html>

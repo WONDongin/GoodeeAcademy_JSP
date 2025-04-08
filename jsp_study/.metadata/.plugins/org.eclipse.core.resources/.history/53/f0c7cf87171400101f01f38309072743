@@ -1,0 +1,22 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%--
+1. 2개의 파라미터 정보 저장 (id/pass)
+2. 로그인정보 검증
+	- 로그아웃 상태 : 로그인하세요. loginForm.jsp 페이지 이동
+	- 본인 탈퇴가능(관리자 제외) : 본인만 탈퇴 가능합니다. main.jsp 페이지 이동
+	- 관리자가 탈퇴시 불가 : 관리자는 탈퇴불가합니다.
+3. 비밀번호 검증
+	- 로그인 정보로 비밀번호 검증.
+	
+--%>
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title></title>
+	</head>
+	<body>
+	
+	</body>
+</html>

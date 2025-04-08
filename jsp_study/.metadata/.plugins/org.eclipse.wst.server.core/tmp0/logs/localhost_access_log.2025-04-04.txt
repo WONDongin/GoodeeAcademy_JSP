@@ -82,3 +82,8 @@
 0:0:0:0:0:0:0:1 - - [04/Apr/2025:17:12:00 +0900] "GET /model1Studey/test0404/test1.jsp HTTP/1.1" 200 97
 0:0:0:0:0:0:0:1 - - [04/Apr/2025:17:12:12 +0900] "GET /model1Studey/test0404/testForm.jsp HTTP/1.1" 200 1142
 0:0:0:0:0:0:0:1 - - [04/Apr/2025:17:12:17 +0900] "POST /model1Studey/test0404/test1.jsp HTTP/1.1" 200 299
+127.0.0.1 - - [04/Apr/2025:17:34:28 +0900] "GET / HTTP/1.1" 404 808
+0:0:0:0:0:0:0:1 - - [04/Apr/2025:17:34:30 +0900] "GET /jspStudy/ex04_request/ex01_request.jsp HTTP/1.1" 500 284
+0:0:0:0:0:0:0:1 - - [04/Apr/2025:17:34:30 +0900] "GET /favicon.ico HTTP/1.1" 404 819
+0:0:0:0:0:0:0:1 - - [04/Apr/2025:17:34:47 +0900] "GET /jspStudy/ex04_request/ex01_requestForm.html HTTP/1.1" 200 1167
+0:0:0:0:0:0:0:1 - - [04/Apr/2025:17:34:51 +0900] "POST /jspStudy/ex04_request/ex01_request.jsp HTTP/1.1" 500 284

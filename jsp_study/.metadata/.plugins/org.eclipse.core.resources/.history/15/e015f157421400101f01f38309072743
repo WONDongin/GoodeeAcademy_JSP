@@ -1,0 +1,22 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%--
+1. 파라미터값 (email,tel) 저장
+2. db에서 두개의 파라미터를 이용하여 id값을 리턴해주는 함수
+	id MemberDao.idSearch(email,tel)
+3. id 존재 : 화면 뒤쪽 2자를 ** 표시하여 화면에 출력하기
+--%>
+<%
+
+
+%>
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	</head>
+	<body>
+	
+	</body>
+</html>
