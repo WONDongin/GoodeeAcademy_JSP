@@ -22,7 +22,7 @@
 	 		<c:set var="op4" value="/"></c:set>
 
 	 		<c:choose>
-	 			<c:when test="${param.op = op1 }">
+	 			<c:when test="${param.op == op1 }">
 	 				<p>${param.x} + ${param.y} = ${param.x + param.y}</p>
 	 			</c:when>
 	 			<c:when test="${param.op == op2 }">
