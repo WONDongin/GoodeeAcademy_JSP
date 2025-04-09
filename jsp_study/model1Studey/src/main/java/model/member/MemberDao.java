@@ -177,5 +177,47 @@ public class MemberDao {
 		}
 		return null;
 	}
+	
+	public boolean updatePass(String id, String pass) {
+		Connection conn = DBConnection.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "update member set pass=? where id=?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, pass);    
+			pstmt.setString(2, id);
+			return pstmt.executeUpdate() > 0;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConnection.close(conn, pstmt, rs);
+		}
+		return false;
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	 
 }
