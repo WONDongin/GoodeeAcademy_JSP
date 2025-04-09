@@ -12,10 +12,10 @@
 	</head>
 	
 	<body>
-		이름: ${param.name}<br/>
-		나이: ${param.age}<br/>
-		성별: ${param.gender == 1? "남자" : "여자"}<br/>
-		년도: ${param.year}<br/>
-		
+		이름 : ${param.name}<br/>
+		나이 : ${param.age}살<br/>
+		성별 : ${param.gender == 1? "남" : "여"}<br/>
+		출생년도 : ${param.year}년<br/>
+		나이 : 만 ${2025 - param.year}살<br/>
 	</body>
 </html>

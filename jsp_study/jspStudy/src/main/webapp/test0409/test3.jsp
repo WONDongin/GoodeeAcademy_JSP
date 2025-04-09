@@ -9,32 +9,30 @@
 	<body>
 		<form method="post" name="f">
 	 		 x:<input type="text" name="x" value="${param.x}" size="5">
-	 		 <select name="op">
-	     		<option selected>+</option><option>-</option>
-	     		<option>*</option><option>/</option>
-	  		</select>
-	  		y:<input type="text" name="y" value="${param.y}" size="5">
-	 		 <input type="submit" value="="><br/>
-	 		 
-	 		<c:set var="op1" value="+"></c:set>
-	 		<c:set var="op2" value="-"></c:set>
-	 		<c:set var="op3" value="*"></c:set>
-	 		<c:set var="op4" value="/"></c:set>
+			<select name="op">
+			  <option value="+" ${param.op == '+' ? 'selected' : ''}>+</option>
+			  <option value="-" ${param.op == '-' ? 'selected' : ''}>-</option>
+			  <option value="*" ${param.op == '*' ? 'selected' : ''}>*</option>
+			  <option value="/" ${param.op == '/' ? 'selected' : ''}>/</option>
+			</select>
 
+	  		y:<input type="text" name="y" value="${param.y}" size="5">
+	 		<input type="submit" value="="><br/>
+	 		
 	 		<c:choose>
-	 			<c:when test="${param.op == op1 }">
-	 				<p>${param.x} + ${param.y} = ${param.x + param.y}</p>
+	 			<c:when test="${param.op == '+'}">
+	 				${param.x} + ${param.y} = ${param.x + param.y}
 	 			</c:when>
-	 			<c:when test="${param.op == op2 }">
-	 				<p>${param.x} - ${param.y} = ${param.x - param.y}</p>
+	 			<c:when test="${param.op == '-'}">
+	 				${param.x} - ${param.y} = ${param.x - param.y}
 	 			</c:when>
-	 			<c:when test="${param.op == op3 }">
-	 				<p>${param.x} x ${param.y} = ${param.x * param.y}</p>
+	 			<c:when test="${param.op == '*'}">
+	 				${param.x} x ${param.y} = ${param.x * param.y}
 	 			</c:when>
-	 			<c:when test="${param.op == op4 }">
-	 				<p>${param.x} ÷ ${param.y} = ${param.x / param.y}</p>
+	 			<c:when test="${param.op == '/'}">
+	 				${param.x} ÷ ${param.y} = ${param.x / param.y}
 	 			</c:when>
-	 		</c:choose> 
+	 		</c:choose>
 		</form>
 	</body>
 </html>

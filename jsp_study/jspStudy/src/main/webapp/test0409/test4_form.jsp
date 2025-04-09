@@ -15,8 +15,8 @@
 		     	<input type="radio" name="gender" value="2">여<br>
 		 	출생연도 : 
 		 	<select name="year">
-		 		<c:forEach var="i" begin="1990" end="2005">
-		  			<option>${i}</option>
+		 		<c:forEach var="i" begin="1900" end="2025">
+		  			<option ${i == 1990 ? "selected" : ""}>${i}</option>
 		  		</c:forEach>
 		 	</select><br>
 		  	<input type="submit" value="전송">

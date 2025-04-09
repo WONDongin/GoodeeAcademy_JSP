@@ -18,20 +18,19 @@
    합계 : <c:out value="${result}" />
    
   <h3>if 태그를 이용하여 출력하기</h3>
-  <c:if test="${ result > 0}">
+  <c:if test="${result > 0}">
   	<p>${result}은 양수 입니다.</p>
   </c:if>
-  
-  <c:if test="${ result < 0}">
+  <c:if test="${result < 0}">
   	<p>${result}은 음수 입니다.</p>
   </c:if>
   
   <h3>choose when 태그를 이용하여 출력하기</h3>
   <c:choose>
-  	<c:when test="${ result > 0}">
+  	<c:when test="${result > 0}">
   		<p>${result}은 양수 입니다.</p>
   	</c:when>
-  	<c:when test="${ result < 0}">
+  	<c:when test="${result < 0}">
   		<p>${result}은 음수 입니다.</p>
   	</c:when>
   	<c:otherwise>
