@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<!-- /WEB-INF/tlds/el_function.tld -->
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation=
+"http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+  version="2.0">
+  <description>EL에서 함수 실행</description>
+  <tlib-version>1.0</tlib-version>
+  <short-name>ELFunctions</short-name>
+  
+  <uri>/ELFunctions</uri>
+  <function>
+     <description>x 와 y의 합</description>
+     <name>add</name>
+     <function-class>ex13.el.Compute</function-class>
+     <function-signature>
+       int add(java.lang.String,java.lang.String)
+     </function-signature>
+  </function>
+  
+  <function>
+     <description>List의 요소 확인</description>
+     <name>contains</name>
+     <function-class>el.Compute</function-class>
+     <function-signature>
+       java.lang.Boolean contains(java.lang.String[],java.lang.String)
+     </function-signature>
+  </function>
+  
+</taglib>

@@ -35,10 +35,10 @@
 	</head>
 	<body>
 		<table>
-			<tr><th>비밀번호</th><td><%= pass.substring(0,pass.length()-2) + "**" %></td></tr>
+			<tr><th>비밀번호</th><td><%=  "**" + pass.substring(2,pass.length())%></td></tr>
 			<tr>
 				<td colspan="2">
-					<input type="button" value="비밀번호전송" onclick="idsend('<%= pass.substring(0,pass.length()-2) %>')">
+					<input type="button" value="비밀번호전송" onclick="idsend('<%= pass.substring(0,pass.length()) %>')">
 				</td>
 			</tr>
 		</table>

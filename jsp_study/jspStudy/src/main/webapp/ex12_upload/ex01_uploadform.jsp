@@ -53,6 +53,6 @@ filename 파일정보 + 파일의 내용
 					return;
 				}
 			})
-			</script>
+		</script>
 	</body>
 </html>
