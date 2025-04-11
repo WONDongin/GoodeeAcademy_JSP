@@ -36,6 +36,7 @@ public class MemberDao {
 		 return false;
 	 }
 	 
+	 // 사용자의 입력한 id값과 DB안 id를 비교하여 속성 전달
 	 public Member selectOne(String id) {
 		 //id : loginForm.jsp 에서 입력한 아이디값
 		 Connection conn = DBConnection.getConnection();

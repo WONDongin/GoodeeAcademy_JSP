@@ -23,6 +23,7 @@ uri="/ELFunctions" : uri가 /ELFunctions 인 파일을 참조
 		</form>
 		<p>
 		합계 : ${test:add(param.x, param.y)}<br/>
+		${test:add(1,9)}
 		</p>
 	</body>
 </html>
