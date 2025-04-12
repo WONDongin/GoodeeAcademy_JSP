@@ -76,7 +76,7 @@
 			
 			function win_upload(){
 				let op = "width=500, height=500, left=50, top=150";
-				open("pictureForm.jsp","",op);
+				open("pictureForm","",op);
 			}
 		</script>
 	</body>

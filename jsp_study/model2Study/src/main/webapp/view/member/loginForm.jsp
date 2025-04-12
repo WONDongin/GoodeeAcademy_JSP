@@ -10,14 +10,13 @@
 	</head>
 	<body>
 		<form action="login" method="post" name="f" onsubmit="return input_check(this)">
-			<table>
-				<caption>로그인</caption>
-				<tr><th>아이디</th><td><input type="text" name="id"></td></tr>
-				<tr><th>비밀번호</th><td><input type="password" name="pass"></td></tr>
-				<tr><td colspan="2"><button>로그인</button>
-				<button type="button" onclick="location.href='joinForm.jsp'">회원가입</button>
-				<button type="button" onclick="win_open('idForm')">아이디 찾기</button>
-				<button type="button" onclick="win_open('pwForm')">비밀번호 찾기</button>
+			<table class="table">
+				<tr><th>아이디</th><td><input type="text" class="form-control" name="id"></td></tr>
+				<tr><th>비밀번호</th><td><input type="password" class="form-control" name="pass"></td></tr>
+				<tr><td colspan="2"><button class="btn btn-secondary">로그인</button>
+				<button type="button" class="btn btn-dark" onclick="location.href='joinForm'">회원가입</button>
+				<button type="button" class="btn btn-secondary" onclick="win_open('idForm')">아이디 찾기</button>
+				<button type="button" class="btn btn-secondary" onclick="win_open('pwForm')">비밀번호 찾기</button>
 				</td></tr>
 			</table>
 		</form>
@@ -47,7 +46,7 @@
 			}
 			
 			function win_open(page){ //page : idForm
-				open(page + ".jsp","","width=500, height=350, left=50, top=150");
+				open(page,"","width=500, height=350, left=50, top=150");
 			}
 		</script>
 		
