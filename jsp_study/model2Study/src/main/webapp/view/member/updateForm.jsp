@@ -10,7 +10,7 @@
 <body>
 <form action="update" method="post" onsubmit="return input_check(this)" name="f">
 <input type="hidden" name = "picture" value="${mem.picture}">
-<table><caption>회원정보 수정</caption>
+<table>
 <tr><td rowspan="4" valign="bottom">
   <img src="../picture/${mem.picture}" width="100" height="120" id="pic"><br>
   <font size="1"><a href="javascript:win_upload()">사진수정</a></font>
