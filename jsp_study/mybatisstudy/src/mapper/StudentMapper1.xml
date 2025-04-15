@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="student">
+	<!-- Student : main.Student 클래스  -->
+	<insert id="insert" parameterType="Student">
+		insert into student(studno,name,id,jumin,grade,major1)
+		values (#{studno},#{name},#{id},#{jumin},#{grade},#{major1})
+	</insert>
+	<!-- 
+	#{studno} : Student.getStudno() 함수 호출됨. get 프로퍼티 
+	#{name}   : Student.getName() 함수 호출됨. get 프로퍼티 
+	-->
+	
+	
+	<select id="selectNo" parameterType="int" resultType="Student">
+		select * from student where studno=#{value}
+	</select>
+	
+	<!-- 데이터 수정 -->
+	<update id="update" parameterType="Student">
+		update student set 
+		grade=#{grade},weight=#{weight},height=#{height},profno=#{profno}
+		where studno = #{studno}
+	</update>
+	
+	<!-- 데이터 수정 -->
+	<delete id="delete" parameterType="int">
+		delete from student where studno = #{value}
+	</delete>
+	
+	<!-- 레코드의 건수 출력 -->
+	<select id="count" resultType="int"> 
+		select count(*) from student
+	</select>
+	
+	<!-- 레코드의 정보 출력 -->
+	<select id="list" resultType="Student" >
+		select * from student
+	</select>
+	
+	<!-- 레코드의 1학년 정보 출력 -->
+	<select id="selectgrade" resultType="Student" parameterType="string">
+		select * from student where grade=#{value}
+	</select>
+	
+	<!-- 레코드의 성이 김씨 정보 출력 -->
+	<select id="selectfname" resultType="Student" parameterType="string">
+		select * from student where name like #{value}
+	</select>
+	
+	<!-- 레코드의 성이 3학년 학생 중 주민번호 기준 여학생 학생 정보 출력  -->
+	<select id="selectall" resultType="Student" parameterType="string">
+		select * from student where  substr(jumin,7,1) in ('2','4') and grade=#{value} 
+	</select>
+	
+	
+	<!-- 
+	resultType = "클래스명"
+	조회된 결과의 컬럼명과 같은 클래스의 set 프로퍼티를 호출
+	컬럼명 studno => Student.setStudno(컬럼studno)
+	-->
+</mapper>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 무조건 첫줄 양식 -->
+<!DOCTYPE configuration PUBLIC "-//mybatis.org/DTD config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+  <!-- confing 파일에서 사용되는 환경 변수 설정  -->
+  <properties resource="mapper/mybatis.properties" />
+  
+  <!-- 클래스명을 별명들 설정 : Member = main.Member, Student = main.Student  -->
+  <typeAliases>
+  	<typeAlias type="main.Member" alias="Member"/>
+  	<typeAlias type="main.Student" alias="Student"/>
+  	<typeAlias type="main.Professor" alias="Professor"/>
+  </typeAliases>
+  
+  <!-- Connection 객체  -->
+  <environments default="development">
+    <environment id="development">
+      <transactionManager type="JDBC" />
+      <dataSource type="POOLED" >
+         <property name="driver" value="${driver}"/>
+         <property name="url" value="${url}"/>
+         <property name="username" value="${username}"/>
+         <property name="password" value="${password}"/>
+      </dataSource>
+    </environment>
+  </environments>
+  
+  <!--  sql 구문을 가진 파일 목록 -->
+  <mappers>
+  	<mapper resource="mapper/MemberMapper1.xml" />
+  	<mapper resource="mapper/StudentMapper1.xml" />
+  	<mapper resource="mapper/ProfessorMapper.xml" />
+  </mappers>
+</configuration>
+
+<!-- 
+상품명,가격,입고일,수량..
+
+http://mybatis.org/dtd/mybatis-3-config.dtd => 확인가능
+
+<상품명>사과</상품명> => xml 규칙을 가지고있는 문서(.dtd)
+<가격>2000</가격>
+...
+
+<물품명>사과</물품명> => X
+-->

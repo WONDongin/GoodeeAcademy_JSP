@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--  /mybatisstudy/src/mapper/MemberMapper1.xml -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="professor">
+	<!-- 레코드의 건수 출력 -->
+	<select id="count" resultType="int"> 
+		select count(*) from professor
+	</select>
+	
+	<!-- 레코드의 모든정보 출력 -->
+	<select id="list" resultType="Professor" >
+		select * from professor
+	</select>
+	
+	<!-- 레코드의 101번 학과 출력 -->
+	<select id="deptno" resultType="Professor" parameterType="string" >
+		select * from professor where deptno = #{value}
+	</select>
+	
+	<!-- 레코드의 성이 김씨인 시간강사 출력 -->
+	<select id="all" resultType="Professor" parameterType="string" >
+		select * from professor where name like #{value} and position = '시간강사' 
+	</select>
+</mapper>
