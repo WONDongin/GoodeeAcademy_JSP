@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>회원정보</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 </head>
 <body>
 <%--
@@ -14,7 +15,7 @@ ${mem.picture} : mem.getPicture() 메서드가 호출됨
 				 picture을 get 프로퍼티(preperty)
 ${mem.id} : mem.getId() 메서드 호출
 --%>
-<table>
+<table class="table">
 <tr><td rowspan="6" width="30%">
   <img src="../picture/${mem.picture}" width="200" height="210"></td>
   <th width="20%">아이디</th><td>${mem.id}</td>

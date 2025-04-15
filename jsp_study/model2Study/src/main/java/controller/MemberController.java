@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -22,6 +23,8 @@ import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.oreilly.servlet.MultipartRequest;
 
 import gdu.mskim.MSLogin;
 import gdu.mskim.MskimRequestMapping;
@@ -501,11 +504,54 @@ public class MemberController extends MskimRequestMapping{
 		return "alert";
 	}
 	
+
+	/* 아이디 중복체크 =================================================================
+	1. id 파라미터
+	2. id를 이용하여 db에서 조회.
+	3. DB에서 조회가 안되는 경우 : 사용한 아이디 입니다. 초록색으로 화면 출력
+       DB에서 조회가 되는 경우 : 사용 중인 아이디 입니다. 빨간색 화면 출력
+    4. 닫기 버튼 클릭되면 화면 닫기   
+	*/
+	@RequestMapping("idchk")
+	public String idchk(HttpServletRequest request, HttpServletResponse response) {
+		String id = request.getParameter("id");
+		Member mem = dao.selectOne(id);
+		String msg = null;
+		boolean able = true;
+		if(mem == null) {
+			msg = "사용가능한 아이디 입니다.";
+		} else {
+			msg = "사용 중인 아이디 입니다.";
+			able = false;
+		}
+		request.setAttribute("msg", msg);
+		request.setAttribute("able", able);
+		return "member/idchk";
+	}
 	
-	
-	
-	
-	
+	/* 사진등록 =================================================================
+	1. request 객체로 이미지업로드 불가 => cos.jar
+	2. 이미지 업로드 폴더 : 현재폴더/picture 설정
+	3. opener 화면에 이미지 볼수 있도록 결과 전달 => javascript
+	4. 현재 화면 close 하기				    => javascript	 
+	*/
+	@RequestMapping("picture")
+	public String picture(HttpServletRequest request, HttpServletResponse response) {
+		String path = request.getServletContext().getRealPath("") + "picture/";
+		String fname = null;
+		File f = new File(path); 	// 업로드되는 폴더 정보
+		if(!f.exists()) f.mkdirs(); // 폴더 생성
+		
+		MultipartRequest multi = null;
+		try {
+			multi = new MultipartRequest(request, path, 10*1024*1024, "utf-8");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		fname = multi.getFilesystemName("picture"); // 선택된 파일의 이름
+		request.setAttribute("fname", fname);
+		return "member/picture";
+	}
 	
 	
 	
