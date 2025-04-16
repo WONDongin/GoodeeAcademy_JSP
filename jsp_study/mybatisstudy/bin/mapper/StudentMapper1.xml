@@ -40,7 +40,7 @@
 	</select>
 	
 	<!-- 레코드의 1학년 정보 출력 -->
-	<select id="selectgrade" resultType="Student" parameterType="string">
+	<select id="selectgrade" resultType="Student" parameterType="int">
 		select * from student where grade=#{value}
 	</select>
 	
@@ -50,10 +50,9 @@
 	</select>
 	
 	<!-- 레코드의 성이 3학년 학생 중 주민번호 기준 여학생 학생 정보 출력  -->
-	<select id="selectall" resultType="Student" parameterType="string">
+	<select id="selectall" resultType="Student" parameterType="int">
 		select * from student where  substr(jumin,7,1) in ('2','4') and grade=#{value} 
 	</select>
-	
 	
 	<!-- 
 	resultType = "클래스명"

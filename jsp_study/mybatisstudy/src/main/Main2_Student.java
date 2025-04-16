@@ -83,7 +83,7 @@ public class Main2_Student {
 		
 		// 3
 		System.out.println("======== student 테이블에서 1학년 학생의 정보 출력 ========");
-		list = session.selectList("student.selectgrade","1");
+		list = session.selectList("student.selectgrade",1);
 		for(Student m : list) System.out.println(m);
 		
 		// 4
@@ -93,7 +93,7 @@ public class Main2_Student {
 		
 		// 5
 		System.out.println("======== student 테이블에서 3학년 학생 중 주민번호 기준 여학생 학생의 정보 출력 ========");
-		list = session.selectList("student.selectall","3");
+		list = session.selectList("student.selectall",3);
 		for(Student m : list) System.out.println(m);
 		
 		// session.commit();
