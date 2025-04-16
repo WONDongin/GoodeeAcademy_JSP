@@ -26,11 +26,14 @@
     </environment>
   </environments>
   
-  <!--  sql 구문을 가진 파일 목록 -->
+  <!-- sql 구문을 가진 파일 목록 -->
   <mappers>
   	<mapper resource="mapper/MemberMapper1.xml" />
   	<mapper resource="mapper/StudentMapper1.xml" />
+  	<mapper resource="mapper/StudentMapper2.xml" />
   	<mapper resource="mapper/ProfessorMapper.xml" />
+  	<!-- mapper 패키지의 인터페이스들을 sql 구문으로 등록(추가 등록필요x) -->
+  	<package name="mapper"/>
   </mappers>
 </configuration>
 

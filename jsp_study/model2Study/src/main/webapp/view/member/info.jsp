@@ -25,9 +25,9 @@ ${mem.id} : mem.getId() 메서드 호출
   <tr><th>이메일</th><td>${mem.email}</td>
   </tr>
   <tr><td colspan="2">
-     <a href="updateForm?id=${mem.id}">수정</a>
+     <a href="updateForm?id=${mem.id}" class="btn btn-dark">수정</a>
      <c:if test="${param.id != 'admin'}">
-     	<a href="deleteForm?id=${mem.id}">탈퇴</a>
+     	<a href="deleteForm?id=${mem.id}" class="btn btn-dark">탈퇴</a>
      </c:if>
   </td></tr>
 </table>
