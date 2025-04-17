@@ -71,11 +71,12 @@ public class BoardDao {
 		}
 		return null;
 	}
-
+	
+	// info 페이지
 	public Board selectOne(int num) {
 		SqlSession session = MybatisConnection.getConnection();
 		try {
-			return session.getMapper(cls).info(num);
+			return session.getMapper(cls).selectOne(num);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -83,10 +84,17 @@ public class BoardDao {
 		}
 		return null;
 	}
-
-	// info 페이지
-
 	
-	
-	
+	// 조회수 증가
+	public int readcntAdd(int num) {
+		SqlSession session = MybatisConnection.getConnection();
+		try {
+			return session.getMapper(cls).readcntAdd(num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			MybatisConnection.close(session);
+		}
+		return 0;
+	}
 }

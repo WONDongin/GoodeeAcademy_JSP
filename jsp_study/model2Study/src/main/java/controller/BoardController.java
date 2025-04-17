@@ -150,11 +150,12 @@ public class BoardController extends MskimRequestMapping {
 		Board b = dao.selectOne(num);
 		
 		if(b != null) {
+			dao.readcntAdd(num);
 			request.setAttribute("b", b);
-			return "redirect:/info?num=" + num;
+			return "board/info";
 		}
-		
-		
-		return null;
+		request.setAttribute("msg","게시글 조회 실패");
+		request.setAttribute("url","redirect:board/list");
+		return "alert";
 	}
 }

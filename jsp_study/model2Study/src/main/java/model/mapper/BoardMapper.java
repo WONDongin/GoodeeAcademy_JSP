@@ -42,7 +42,10 @@ public interface BoardMapper {
 
 	
 	@Select("select * from board where num=#{num}")
-	Board info(int num);
+	Board selectOne(int num);
+
+	@Update("update board set readcnt = readcnt + 1 where num = #{num}")
+	int readcntAdd(int num);
 
 	
 	

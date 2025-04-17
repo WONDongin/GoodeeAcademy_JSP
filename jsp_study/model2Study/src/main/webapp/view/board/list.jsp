@@ -44,7 +44,7 @@
 							<a href="info?num=${b.num}">${b.title}</a>
 						</td>
 						<td>${b.writer}</td>
-						<td>${b.regdate }</td>
+						<td><fmt:formatDate value="${b.regdate}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
 						<td>${b.readcnt }</td>
 					</tr>
 				</c:forEach>
