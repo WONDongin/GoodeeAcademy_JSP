@@ -86,16 +86,15 @@ public class BoardDao {
 	}
 	
 	// 조회수 증가
-	public int readcntAdd(int num) {
+	public void readcntAdd(int num) {
 		SqlSession session = MybatisConnection.getConnection();
 		try {
-			return session.getMapper(cls).readcntAdd(num);
+			session.getMapper(cls).readcntAdd(num);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			MybatisConnection.close(session);
 		}
-		return 0;
 	}
 	
 	// 

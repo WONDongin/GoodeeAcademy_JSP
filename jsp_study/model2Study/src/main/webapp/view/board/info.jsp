@@ -43,7 +43,7 @@
 					<a class="btn btn-dark" href="replyForm?num=${b.num }">답변</a>
 					<a class="btn btn-dark" href="updateForm?num=${b.num }">수정</a>
 					<a class="btn btn-dark" href="deleteForm?num=${b.num }">삭제</a>
-					<a class="btn btn-dark" href="list?boardid=${boardid}">목록</a>
+					<a class="btn btn-dark" href="list?boardid=${b.boardid}">목록</a>
 				</td>
 			</tr>
 		</table>

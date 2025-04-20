@@ -42,11 +42,11 @@ public interface BoardMapper {
 			+ " order by grp desc, grpstep asc limit #{start}, #{limit}")
 	List<Board> list(Map<String, Object> map);
 	
-	@Select("select * from board where num=#{num}")
+	@Select("select * from board where num=#{value}")
 	Board selectOne(int num);
 
-	@Update("update board set readcnt = readcnt + 1 where num = #{num}")
-	int readcntAdd(int num);
+	@Update("update board set readcnt = readcnt + 1 where num = #{value}")
+	void readcntAdd(int num);
 	
 	@Update("update board set grpstep = grpstep + 1 "
 			+ " where grp=#{grp} and grpstep > #{grpstep}")
