@@ -113,10 +113,23 @@ public class BoardController extends MskimRequestMapping{
 		request.getSession().setAttribute("boardid", boardid);
 		boardid = (String)request.getSession().getAttribute("boardid");
 		
+		/* 검색관련 파라미터 추가하기 : column, find */
+		String column = request.getParameter("column");
+		String find = request.getParameter("find");
+		/* 
+		column 과 find 값은 두개가 동시에 존재해야 한다. 
+		하나만 파라미터값으로 존재하면
+		두개의 파라미터가 없는 것으로 설정하기  
+		*/
+		if(column == null || column.trim().equals("") || find == null || find.trim().equals("")) {
+			column = null;
+			find = null;
+		}
 		int limit = 10; //페이지당 출력되는 게시물의 건수
-		int boardcount = dao.boardCount(boardid); //등록된 게시물 건수
+		int boardcount = dao.boardCount(boardid,column,find); //등록된 게시물 건수
+		
 		//pageNum에 해당하는 게시물목록을 최대 10를 db에서 조회
-		List<Board> list = dao.list(boardid,pageNum,limit);
+		List<Board> list = dao.list(boardid,pageNum,limit,column,find);
 	    int maxpage = (int)((double)boardcount/limit + 0.95);
 	    /*  maxpage : 필요한 페이지의 갯수
 	     *    게시물건수       maxpage   
@@ -345,4 +358,6 @@ public class BoardController extends MskimRequestMapping{
 	   request.setAttribute("url", url); 
 		return "alert";
 	}
+	
+	
 }

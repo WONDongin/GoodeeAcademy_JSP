@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<!-- /webapp/test0421/test1.html
+   test1.html: ajax 객체를 통해 test1.jsp의 숫자 중 가장 큰값을 찾아 result 영역에 출력하기 
+   test1.jsp : 0~99사이의 임의의 값을 10 개 생성하여 ,로 연결하여 전송하기
+-->
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>ajax Test</title>
+	</head>
+	<body>
+		<div id="result"></div>
+		<script type="text/javascript">
+			window.onload = function(){
+				const xhttp = new XMLHttpRequest();
+				xhttp.open("GET","test1.jsp", true);
+				xhttp.send();
+				xhttp.onreadystatechange = function(){
+					if(this.readyState == 4 && this.status == 200){
+						// Math.max.apply(null. array) : 베열에서 최댓값 구하기
+						// map(Number) : 각 항목을 숫자로 변환
+						const maxNumber = Math.max.apply(null,this.responseText.split(",").map(Number));
+						document.querySelector("#result").innerHTML = `${maxNumber}`;
+					}
+				}
+			}
+		</script>
+	</body>
+</html>

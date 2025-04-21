@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>jqery를 이용한 ajax</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	</head>
+	<body>
+		
+		<button id="btn1">ex07_ajax1.jsp 호출</button>
+		<button id="rmbtn1">ex07_ajax1.jsp 호출로 추가된 요소제거</button>
+		<br/>
+		<button id="btn2">ex07_ajax2.jsp 호출</button>
+		<button id="rmbtn2">ex07_ajax2.jsp 호출로 추가된 요소제거</button>
+		
+		<script type="text/javascript">
+			$(function(){
+				$("#btn2").click(function(){
+					$.ajax({
+						url : "ex07_ajax2.jsp",
+						type : "POST",
+						// data : "name=홍길동&age=20",
+						data : {name: "홍길동", age:22},
+						success : function(data){
+							$("body").append(data)
+						},
+						error : function(e){
+							alert("서버오류:" + e.status)
+						}
+					})
+				})
+				
+				$("#rmbtn2").click(function(){
+					$("h2:last").remove();
+				})
+				
+				
+				$("#rmbtn1").click(function(){
+					$("h1:last").remove();
+					// $("h1").eq(-1).remove();  // eq(-1) : 뒤에서 첫번째(마지막 데이터)
+					// $("h1").get(-1).remove(); // get(-1) : 뒤에서 첫번째(마지막 데이터)
+				})
+				
+				$("#btn1").click(function(){
+					$.ajax("ex07_ajax1.jsp",{
+						success : function(data){
+							// data : 서버에서 받은 데이터 <h1>jQuery Ajax 첫번째 연습</h1>
+							$("body").append(data)
+						},
+						error : function(e){
+							alert("서버 오류 : " + e.status)
+						}
+					})
+				})
+			})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<!-- 
+1. ajaxStudy 다이나믹 프로젝트 생성
+2. /webapp/ex01_basic.html 파일 생성
+-->
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>XMLHttpRequest 객체</title>
+	</head>
+	<body>
+		<h2>XMLHttpRequest 객체</h2>
+		<button onclick="loadJson()">요청</button>
+		<div id="demo"></div>
+		
+		<script type="text/javascript">
+			function loadJson(){
+				// ajax 객체 --------- readyState : 0
+				// 서버에 요청 할 수 잇는 자바스크립트 객체
+				const xhttp = new XMLHttpRequest(); 
+				//------- readyState : 1
+				xhttp.open("GET","ex01_basic.jsp", true); // open(method,url,[비동기방식])
+				xhttp.send(); // 서버로 요청 가능 ------- readyState : 2
+				/*
+				onreadystatechange : xhttp 객체의 상태가 변경되면 자동호출되는 함수 설정
+				=> 콜백함수
+				*/
+				xhttp.onreadystatechange = function(){
+				/* 
+				readyState : ajax 상태 
+				0 : 객체 생성
+				1 : open() 실행
+				2 : send() 실행. 서버에 요청 완료. 서버응답없음
+				3 : 서버에 응답 중. 일부 응답 중
+				4 : 서버에서 응답 완료
+				
+				status : 서버에서 응답 결과. HTTP 응답코드
+				200 : 정상 처리 완료
+				404 : 서버 페이지 없음
+				500 : 서버페이지에서 오류발생
+				*/ 
+					if(this.readyState == 4 && this.status == 200){ // 정상 응답 완료
+						// responseText : 서버에서 전달 받은 응답 메세지
+						alert(this.responseText);
+						document.querySelector("#demo").innerHTML = this.responseText;
+					}
+				}
+			}
+		</script>
+		
+
+	</body>
+</html>

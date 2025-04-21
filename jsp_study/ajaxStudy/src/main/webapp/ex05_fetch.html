@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>JSON 으로 불러오기</title>
+	</head>
+	<body>
+		<input type="button" value="json읽기1" onclick="load1('ex03_json.json')">
+		<input type="button" value="json읽기2" onclick="load2('ex03_json.json')">
+		<div id="area"></div>
+		<script type="text/javascript">
+			function load1(url){
+				fetch(url)
+				.then((r) => r.text()) // r.text() : 서버에서 응답받은 문자열
+				.then((t) =>{ // t : r.text()
+					let data = JSON.parse(t); // t 문자열 => json 객체로 변경. 배열
+					let area = document.querySelector("#area");
+					for(s of data){
+						area.innerHTML += "<p>" + s.author.book + ":" + s.author.pubDate + "</p>";
+					}
+				})
+			}
+			
+			function load2(url){
+				fetch(url)
+				.then((r) => r.json()) // r.json() : json 객체. 배열
+				.then(data =>{ // data : r.json(). 배열
+					let area = document.querySelector("#area");
+					for(s of data){
+						area.innerHTML += "<p>" + s.author.book + ":" + s.author.pubDate + "</p>";
+					}
+				})
+			}
+		</script>
+	</body>
+</html>
