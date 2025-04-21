@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>fetch 함수이용</title>
+	</head>
+	<body>
+		<form name="f">
+			<input type="text" name="name">
+		</form>
+		
+		<button type="button" onclick="loadJspGet()">입력(get)</button>
+		<button type="button" onclick="loadJspPost()">입력(post)</button>
+		<div id="demo"></div>
+		<script type="text/javascript">
+			function loadJspGet(){
+				fetch("ex02_basic.jsp?name=" + document.f.name.value)
+				.then((r) => r.text()) // ex02 from에서 입력받은 정보 저장
+				.then((data) => document.querySelector("#demo").innerHTML=data)
+			}
+			
+			function loadJspPost(){
+				fetch("ex02_basic.jsp",{
+					method : "POST",
+					headers : {
+						"Content-Type":"application/x-www-form-urlencoded:charset=UTF-8"},
+					body : "name=" + document.f.name.value // 파일안 body 부분
+				})
+				.then((r) => r.text())
+				.then((data) => document.querySelector("#demo").innerHTML=data)
+			}
+			
+		</script>
+	</body>
+</html>

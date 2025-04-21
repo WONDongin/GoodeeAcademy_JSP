@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<!-- /webapp/test0421/test2.html
+   test2.html : fetch을 통해 현재 페이지에 전송받아 결과를 result 영역에 출력하기 
+   test2.jsp 에서 num에서 입력 받은 숫자까지의 합계를 구하기
+-->
+<html>
+<head>
+<meta charset="UTF-8">
+<title>fetch Test</title>
+</head>
+<body>
+<input type="text" id="num">
+<button onclick="fetchteset()">전체합계구하기</button> 
+<button onclick="fetchteset(1)">짝수합구하기</button> 
+<button onclick="fetchteset(2)">홀수합구하기</button> 
+<div id="result"></div>
+
+<script type="text/javascript">
+	function fetchteset(){
+		fetch("test2.jsp",{
+			method : "POST",
+			headers : {
+				"Content-Type":"application/x-www-form-urlencoded:charset=UTF-8"},
+			body : document.querySelector("h2") // 파일안 body 부분
+		})
+		.then((r) => r.text())
+		.then((data) => document.querySelector("#result").innerHTML=data)
+	}
+	
+</script>
+</body></html>

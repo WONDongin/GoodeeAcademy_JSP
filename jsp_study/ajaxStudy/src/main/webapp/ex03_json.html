@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title></title>
+	</head>
+	<body>
+		<input type="button" value="Json읽기" onclick="load('ex03_json.json')">
+		<div id="area"></div>
+		<script type="text/javascript">
+			function load(url){
+				const xhttp = new XMLHttpRequest(); // XMLHttpRequest 객체 생성
+				xhttp.open("GET", url);              // GET 방식으로 URL 열기
+				xhttp.send();                        // 요청 전송
+				xhttp.onreadystatechange = callBack; // 상태 변화가 생기면 callBack 함수 실행
+			}
+			// 데이터를 다 받아오면 callBack() 함수가 실행
+
+			
+			function callBack(){
+				if(this.readyState == 4 && this.status == 200){
+					let area = document.querySelector("#area") // div 태그
+					
+					/* 받아온 텍스트 데이터를 JSON 객체로 변환
+					this.responseText : JSON.parse
+					 [] : 배열
+					 {} : 객체
+					 
+					[{"author":{"book":"ajax","pubDate":"2025-04-21"}},
+					 {"author":{"book":"자바","pubDate":"2025-02-01"}},
+					 {"author":{"book":"웹","pubDate":"2025-03-20"}}]
+					*/
+					// data : 배열 json 객체를 요소로 가진다.
+					let data = JSON.parse(this.responseText) 
+					for(s of data){ // s : json 객체요소 1개
+						// ajax:2025-04-21
+						area.innerHTML += '<p>' + s.author.book + ":" + s.author.pubDate + '</p>' 
+					}	
+				}
+			}
+		</script>
+	</body>
+</html>

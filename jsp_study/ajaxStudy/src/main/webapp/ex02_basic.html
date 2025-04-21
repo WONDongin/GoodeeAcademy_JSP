@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>XMLHttpRequest 객체를 통한 요청</title>
+	</head>
+	<body>
+		<form name="f">
+			<input type="text" name="name">
+		</form>
+		
+		<button type="button" onclick="loadJspGet()">입력(get)</button>
+		<button type="button" onclick="loadJspPost()">입력(post)</button>
+		<div id="demo"></div>
+		
+		<script type="text/javascript">
+			function loadJspGet(){
+				const xhttp = new XMLHttpRequest();
+				const params = "?name=" + document.f.name.value;
+				xhttp.open("GET","ex02_basic.jsp"+params);
+				xhttp.send()
+				xhttp.onreadystatechange = callback;
+			}
+			
+			function loadJspPost(){
+				const xhttp = new XMLHttpRequest();
+				const params = "name=" + document.f.name.value;
+				xhttp.open("Post","ex02_basic.jsp");
+				xhttp.setRequestHeader // POST 방식에서 필요. GET 방식인 경우도 설정 가능
+				("Content-type","application/x-www-form-urlencoded;charset=UTF-8")
+				xhttp.send(params)// 파라미터 전달
+				xhttp.onreadystatechange = callback;
+			}
+			
+			function callback(){
+				if(this.readyState == 4 && this.status == 200){
+					alert(this.responseText);
+					document.querySelector("#demo").innerHTML = this.responseText;
+				}
+			}
+		</script>
+	</body>
+</html>

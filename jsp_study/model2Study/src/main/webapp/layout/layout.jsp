@@ -60,6 +60,9 @@
       <li class="nav-item">
         <a class="nav-link" href="${path}/board/list?boardid=2">자유게시판</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="${path}/book/bookList">방명록</a>
+      </li>
     </ul>
     <ul class="navbar-nav">
       <c:if test="${sessionScope.login == null }">
