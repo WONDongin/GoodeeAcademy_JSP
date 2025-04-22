@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>xml 연습</title>
+	</head>
+	<body>
+		<button id="allbtn">전체구</button>
+		<button onclick="stateprint('east')">동쪽구</button>
+		<button onclick="stateprint('west')">서쪽구</button>
+		<button onclick="stateprint('south')">남쪽구</button>
+		<button onclick="stateprint('north')">북쪽구</button>
+		<div id="state"></div>
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+		<script type="text/javascript">
+		// 전체구 버튼
+		$(function(){
+		    $("#allbtn").click(function(){
+		        $("#state").html(""); // <div id="state"></div> 기존 내용 초기화
+		        $.ajax("ex11_address.xml", {
+					// data : xml DOM트리 참조객체
+		            success: function(data){
+		                $("#state").append("<ul>") // <div id="state"><ul></ul></div>
+		                // $(data).find("state") : state 태그 목록들. 배열
+		                $(data).find("state").each(function(){
+		                    $("#state").append("<li>" + $(this).text() + "</li>")
+		                    // <div id="state"><ul><li>강북구</li></ul></div>...
+		                })
+		                $("#state").append("</ul>")
+		            },
+		            error : function(e){
+		                alert("서버 오류:" + e.status);
+		            }
+		        })
+		    });
+		})
+		// 전체구 세분화 버튼
+	    function stateprint(val){
+	        $("#state").html("")
+	        $.ajax("ex11_address.xml", {
+	            success: function(data){
+	                $("#state").append("<ul>")
+	                $(data).find(val).find('state').each(function(){
+	                    $("#state").append("<li>" + $(this).text() + "</li>");
+	                })
+	                $("#state").append("</ul>")
+	            },
+	            error : function(e){
+	                alert("서버 오류:" + e.status);
+	            }
+	        })
+	    }
+		</script>
+	</body>
+</html>
