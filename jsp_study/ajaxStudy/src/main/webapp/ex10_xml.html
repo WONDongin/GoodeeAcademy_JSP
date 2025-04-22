@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>ajax을 이용하여 xml문서 분석하기</title>
+	</head>
+	<body>
+		<button id="btn">XML 연습</button>
+		<div id="person"></div>
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+		<script type="text/javascript">
+		$(function(){
+		    $("#btn").click(function(){
+		        $.ajax("ex10_person.xml", {
+		            success: function(data) {
+						// data : DOM 타입. JQuery인식
+						// $(data).find("person") : data의 person 하위 태그들. 배열로 리턴
+		                $(data).find("person").each(function(){
+		                    // $(this) : 현재 person 태그
+		                	name = "<li>" + $(this).find("name").text() + "</li>";
+		                    gen  = "<li>" + $(this).find("gender").text() + "</li>";
+		                    part = "<li>" + $(this).find("part").text() + "</li>";
+		                    $("#person").append("<ul>" + name + gen + part + "</ul>");
+		                })
+		            }
+		        })
+		    })
+		});
+		</script>
+	</body>
+</html>

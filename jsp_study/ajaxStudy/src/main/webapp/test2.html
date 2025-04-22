@@ -20,26 +20,22 @@
 <div id="result"></div>
 
 <script type="text/javascript">
-	// get 방식
 	function fetchteset(val){
 		let num = document.querySelector("#num").value;
-		
-		fetch(`test2.jsp?num=${num}&val=${val}`)
+		fetch("test2.jsp?num=" + num +"&val=" + val)
 		.then((r) => r.text())
 		.then((data) => document.querySelector("#result").innerHTML = data)
 	}
-	// POST 방식
+	
 	function fetchpost(val){
 		let num = document.querySelector("#num").value;
-		
-		fetch("test2.jsp", {
-			method: "POST",
-			headers: {"Content-Type" : "application/x-www-form-urlencoded;charset=UTF-8"},
-			body : "num=" + num + "&val=" + val
+		fetch("test2.jsp",{
+			method : "POST",
+			headers : {"Content-Type":"application/x-www-form-urlencoded;charset=UTF-8"},
+			body : `num=${num}&val=${val}`
 		})
 		.then((r) => r.text())
 		.then((data) => document.querySelector("#result").innerHTML = data)
 	}
-			
 </script>
 </body></html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<!-- 
+1. 로그인 버튼 클릭시 id,pass 값을 ex08_login.jsp 페이지로 전송
+2. ex08_login.jsp
+- member 테이블을 읽어 id,pass 검증
+- 일치 : 반갑습니다. name님 
+- 불일치 : 아이디 또는 비밀번호가 틀립니다.
+------------------------------------------------------
+아이디 중복 버튼 클릭
+1. id 파라미터 값을 ex08_iddup.jsp로 전송
+2. ex08_iddup.jsp
+- member 테이블 읽기
+- 존재 : 존재하는 아이디 입니다. + 입력된 id 를 제거
+- 존재안함 : 회원가입이 가능한 아이디 입니다.
+-->
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>login</title>
+	
+	</head>
+	<body>
+<form name="f">
+	아이디:<input type="text" id="id">
+	<input type="button" value="아이디중복" id="btn"><br/>
+	비밀번호:<input type="password" id="pass">
+	<input type="submit" value="로그인" id="loginbtn"><br/>
+</form>
+<div id="message"></div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		// 로그인 버튼
+		$("#loginbtn").click(function(){
+			// id/pw 값 저장
+			let param = {id:$("#id").val(),pass:$("#pass").val()}
+			$.ajax({
+				url : "ex08_login.jsp",
+				type : "POST",
+				data : param, // 데이터 전송(id/pw)
+				success : function(data){ // 정상 음답완료
+					$("#message").html(data)
+				},
+				error : function(e){ // 서버 오류 응답
+					alert("서버오류:" + e.status)		
+				}
+			})
+			return false; // 기본 submit 이벤트 취소
+		})
+		
+		// 아이디 중복체크 버튼
+		$("#btn").click(function(){
+			if($("#id").val() == ""){
+				$("#message").html("아이디를 입력하세요")
+				return;
+			}
+			let param = {id:$("#id").val()}
+			$.ajax({
+				url : "ex08_iddup.jsp",
+				type : "POST",
+				data : param, 
+				success : function(data){
+					// data : <h1 id="result" class="find" style="color:red;">${param.id} : 존재하는 아이디 입니다.</h1>
+					// data : <h1 id="result" class="notfind">${param.id} : 회원가입이 가능한 아이디 입니다.</h1> 
+					$("#message").html(data)			
+					if($("#result").is(".find")){
+						$("#id").val(""); // 존재하는 아이디 시 빈값 적용
+					}
+				},
+				error : function(e){ // 서버 오류 응답
+					alert("서버오류:" + e.status)		
+				}
+			})
+		})
+	})
+</script>
+	</body>
+</html>

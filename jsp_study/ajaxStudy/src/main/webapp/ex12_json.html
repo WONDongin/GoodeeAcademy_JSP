@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>JSON 연습</title>
+	</head>
+	<body>
+		<button id="btn">JSON연습</button>
+		<div id="result"></div>
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+		<script type="text/javascript">
+			$(function(){
+			    $("#btn").click(function(){
+			        $.ajax({
+			            url : "ex12_person.jsp",
+			            success : function(data) {
+			                let person = JSON.parse(data)
+			                $.each(person, function(i, item){
+			                    $("#result").append("<ul>")
+			                    $("#result").append("<li>" + item.name + "</li>")
+			                    $("#result").append("<li>" + item.gender + "</li>")
+			                    $("#result").append("<li>" + item.part + "</li>")
+			                    $("#result").append("</ul>")
+			                })
+			            }
+			        })
+			    })
+			})
+		</script>
+	</body>
+</html>

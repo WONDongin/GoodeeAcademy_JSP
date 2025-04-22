@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- /webapp/ex10_person.xml -->
+<people> <!--  루트태그 : 한개만존재 -->
+  <person>
+     <name>홍길동</name><gender>남자</gender><part>기타</part>
+  </person>
+  <person>
+     <name>김길순</name><gender>여자</gender><part>드럼</part>
+  </person>
+  <person>
+     <name>박길수</name><gender>남자</gender><part>보컬</part>
+  </person>
+</people>

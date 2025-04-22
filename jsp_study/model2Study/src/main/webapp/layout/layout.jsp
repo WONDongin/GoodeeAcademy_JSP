@@ -87,15 +87,32 @@
 </nav>
 
 <div class="container" style="margin-top:30px">
- <sitemesh:write property="body" />  
+	<sitemesh:write property="body" />  
 </div>
 <footer class="footer">
-  <div class="footer_link">
-      <a href="">이용약관</a> |
-      <a href="">개인정보취급방침</a> |
-      <a href="">인재채용</a> |
-      <a href="">고객센터</a>
-  </div>
+	<div>
+	    <span id="si">
+	        <select name="si" onchange="getText('si')">
+	            <option value="">시도를 선택하세요</option>
+	        </select>
+	    </span>
+	    <span id="gu">
+	        <select name="gu" onchange="getText('gu')">
+	            <option value="">구군을 선택하세요</option>
+	        </select>
+	    </span>
+	    <span id="dong">
+	        <select name="dong" onchange="getText('dong')">
+	            <option value="">동리를 선택하세요</option>
+	        </select>
+	    </span>
+	</div>
+	<div class="footer_link">
+	    <a href="">이용약관</a> |
+	    <a href="">개인정보취급방침</a> |
+	    <a href="">인재채용</a> |
+	    <a href="">고객센터</a>
+	</div>
   <div class="footer_company">
    <ul>
       <li>상호명 : GooDee Academy</li>
@@ -110,6 +127,58 @@
      Copyright ⓒ GooDee Academy. All rights reserved.
   </div>
  </footer>
+ 
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function() {
+        // 시도 조회
+        $.ajax({
+            url: "${path}/ajax/select?level=si",
+            success: function(data) {
+                let arr = JSON.parse(data);
+                $.each(arr, function(i, item) {
+                    $("select[name=si]").append("<option>" + item + "</option>");
+                });
+            },
+            error: function(e) {
+                alert("서버 오류: " + e.status);
+            }
+        });
+    });
+
+    function getText(divid) {
+        let selectedSi = $("select[name=si]").val();
+        let selectedGu = $("select[name=gu]").val();
+
+        let level = "";
+        let param = "";
+
+        if (divid === "si") {
+            level = "gu";
+            param = "si=" + encodeURIComponent(selectedSi);
+        } else if (divid === "gu") {
+            level = "dong";
+            param = "si=" + encodeURIComponent(selectedSi) + "&gu=" + encodeURIComponent(selectedGu);
+        } else {
+            return;
+        }
+
+        $.ajax({
+            url: "${path}/ajax/select?level=" + level + "&" + param,
+            success: function(data) {
+                let arr = JSON.parse(data);
+                let target = "select[name=" + level + "]";
+                $(target).empty().append("<option value=''>" + (level === "gu" ? "구군" : "동리") + "을 선택하세요</option>");
+                $.each(arr, function(i, item) {
+                    $(target).append("<option>" + item + "</option>");
+                });
+            },
+            error: function(e) {
+                alert("서버 오류: " + e.status);
+            }
+        });
+    }
+</script>
 
 </body>
 </html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>자동완성</title>
+	<style type="text/css">
+		.listbox {position : relative;left : 10px;margin : 10px;width : 400px;background-color: #EEEEEE;color : #FF00FF;border : 2px solid #000;}
+		.namelist {margin : 0px; padding : 0px; list-style: none;
+		.hover {background-color: cyan; color : blue;}
+	</style>
+	</head>
+	<body>
+		<span>사용자 아이디</span>
+		<input type="text" name="id" id="id">
+		<div class="listbox">
+			<div class="namelist"></div>
+		</div>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+		
+		<script type="text/javascript">
+			$(function(){
+				$(".listbox").hide()
+				$("#id").keyup(function(){
+					let data = "id=" + $("#id").val()
+					$.ajax({
+						url: "ex09_idlist.jsp",
+						type:"POST",
+						data: data,
+						success : function(html){
+							$(".listbox").show()
+							$(".namelist").html(html) // <ul><li>id</li></ul>
+							
+							$("li").hover(function(){ // 마우스 hover 시
+								$(this).addClass("hover")
+							}, function(){ 
+								$(this).removeClass("hover")
+							})
+							
+							$("li").click(function(){ // li 태그에 클릭이벤트 등록
+								$("#id").val($(this).text()) // $(this).text() : li태그의 내용
+								$(".listbox").hide()
+							
+							})
+						},
+						error : function(e){
+							alert("서버오류:" + e.status)
+						}
+					})
+				})
+			})
+		</script>
+	</body>
+</html>
