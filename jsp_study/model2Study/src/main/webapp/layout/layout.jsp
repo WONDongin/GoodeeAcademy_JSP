@@ -87,7 +87,21 @@
 </nav>
 
 <div class="container" style="margin-top:30px">
-	<sitemesh:write property="body" />  
+
+<%-- 
+1차트 파이(작성자별 게시물 등록 건수: 가장 많이 작성한 5명 작성자), 
+2차트 막대(최근 7일간 작성일자별 게시물 등록 건수) 
+--%>
+<div class="row">
+	<div class="col" style="border:1px solid #eeeeee">
+		<canvas id="canvas1" style="width:100%"></canvas>
+	</div>
+	<div class="col" style="border:1px solid #eeeeee">
+		<canvas id="canvas2" style="width:100%"></canvas>
+	</div>
+</div>
+
+<sitemesh:write property="body" />  
 </div>
 <footer class="footer">
 	<div>
@@ -128,10 +142,14 @@
   </div>
  </footer>
  
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
 <script type="text/javascript">
     $(function() {
-        // 시도 조회
+		piegraph(); // 작성자별 게시물 등록 건수 파이 그래프로 구현
+		bargraph();
+		
+        // ajax을 이용하여 시도 데이터 조회
         $.ajax({
             url: "${path}/ajax/select?level=si",
             success: function(data) {
@@ -155,6 +173,7 @@
 
         if (divid === "si") {
             level = "gu";
+           	// encodeURIComponent 생략가능
             param = "si=" + encodeURIComponent(selectedSi);
         } else if (divid === "gu") {
             level = "dong";
@@ -166,6 +185,7 @@
         $.ajax({
             url: "${path}/ajax/select?level=" + level + "&" + param,
             success: function(data) {
+				// 데이터 받기
                 let arr = JSON.parse(data);
                 let target = "select[name=" + level + "]";
                 $(target).empty().append("<option value=''>" + (level === "gu" ? "구군" : "동리") + "을 선택하세요</option>");
@@ -178,6 +198,125 @@
             }
         });
     }
+    
+    function piegraph(){
+		$.ajax("${path}/ajax/graph1",{
+			success : function(data){
+				// data :  [{"cnt":4,"writer":"원동인"},{"cnt":3,"writer":"테스트"},...]
+				pieGraphPrint(data);
+			},
+			error : function(e){
+				alert("서버오류:" + e.status)
+			}
+		})
+		
+    }
+    
+    function bargraph(){
+		$.ajax("${path}/ajax/graph2",{
+			success : function(data){
+				barGraphPrint(data);
+			},
+			error : function(e){
+				alert("서버오류:" + e.status)
+			}
+		})
+		
+    }
+    
+    
+    function pieGraphPrint(data){
+		let rows = JSON.parse(data); // 서버에서 JSON 형태로 데이터 전송
+		let writers = [] // 작성자 목록. 라벨값
+		let datas = []   // 파이 데이터 값
+		let colors = []  // 색상값
+		// rows : data 배열, item : {"cnt":4,"writer":"원동인"}
+		$.each(rows,function(i,item){
+			writers[i] = item.writer; //[원동인,테스트...]
+			datas[i] = item.cnt       //[4,3...]
+			colors[i] = randomColor(1);
+		})
+		
+		let config = {
+			type: 'pie',
+			data : {
+				datasets : [{
+					data : datas,
+					backgroundColor : colors
+				}],
+				labels : writers
+			},
+			
+			options : {
+				// 반응형
+				responsive : true,
+				legend : {position:"bottom"},
+				title : {
+					display:true,
+					text : '최근 7일간 작성일자별 게시물 등록 건수',
+					position:"bottom"
+				}
+			}
+		}
+		let ctx = document.querySelector("#canvas1");
+		new Chart(ctx,config)
+    }
+    
+    
+    // 차트 2
+    function barGraphPrint(data){
+		let rows = JSON.parse(data); // 서버에서 JSON 형태로 데이터 전송
+		let todays = [] // 작성자 목록. 라벨값
+		let datas = []   // 파이 데이터 값
+		let colors = []  // 색상값
+
+		$.each(rows,function(i,item){
+			todays[i] = item.today; //[원동인,테스트...]
+			datas[i] = item.cnt       //[4,3...]
+			colors[i] = randomColor(1);
+		})
+		
+		let config = {
+			type: 'bar',
+			data : {
+				datasets : [{
+					data : datas,
+					backgroundColor : colors
+				}],
+				labels : todays
+			},
+			
+			options : {
+				// 반응형
+				responsive : true,
+				legend : {position:"bottom", display:false},
+				title : {
+					display:true,
+					text : '게시글 작성자별 등록 건수(최대 5명)',
+					position:"bottom"
+				}
+			}
+		}
+		let ctx = document.querySelector("#canvas2");
+		new Chart(ctx,config)
+		console.log(todays)
+    }
+    
+    
+ 	// 색상 랜덤(0~255)
+	function randomColorFactor(){
+	  	return Math.round(Math.random() * 255)
+	}
+	
+	// rgba(100,200,300,1)
+	function randomColor (opa) {
+	  return "rgba(" + randomColorFactor() + "," 
+	         + randomColorFactor() + "," 
+	         + randomColorFactor() + "," 
+	         + (opa || ".3") + ")";
+	}
+    
+    
 </script>
 
 </body>
