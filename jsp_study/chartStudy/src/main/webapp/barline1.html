@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>선, 막대 그래프</title>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+	</head>
+	<body>
+		<div style="width:75%">
+			<canvas id ="canvas"></canvas>
+		</div>
+		<script type="text/javascript">
+			let months = ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"];
+			let chartData = {
+				labels  : months, // x 축
+				datasets : [
+					{
+						type: 'line',            // 선 그래프
+						label : '영업부',
+						borderColor : '#ff00ff', // 선의 색상
+						borderWidth : 3,         // 선의 두께
+						fill : true,             // hover 시 색상 채움효과
+						data : [10,15,25,55,-25,-65,30,56,78,12,50,25]
+					},
+					{
+						type: 'bar',               // 막대그래프
+						label : '영업부',
+						backgroundColor : '#A566FF', 
+						borderColor : 'black',
+						borderWidth : 2,
+						data : [10,15,25,55,-25,-65,30,56,78,12,50,25]
+					},
+					{
+						type: 'line',             
+						label : '총무부',
+						borderColor : '#0000FF', 
+						borderWidth : 3,
+						fill : false,
+						data : [22,-5,30,50,5,-5,36,60,50,20,9,3]
+					},
+					{
+						type: 'bar',             
+						label : '총무부',
+						backgroundColor : '#0000FF', 
+						borderColor : 'black',
+						borderWidth : 2,
+						fill : false,
+						data : [22,-5,30,50,5,-5,36,60,50,20,9,3]
+					}
+				]}
+			
+			window.onload = function(){
+				let ctx = document.getElementById("canvas");
+				new Chart(ctx,{
+					type : 'bar',
+					data : chartData,
+					options : {
+						responsive : true, // 반응형
+						title : {display : true, text : '막대그래프와 선그래프'}
+					},
+					legend : {display : true}
+				})
+			}
+		</script>
+	</body>
+</html>
