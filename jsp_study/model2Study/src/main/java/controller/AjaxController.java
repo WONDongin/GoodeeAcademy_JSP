@@ -8,6 +8,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
@@ -19,118 +20,167 @@ import gdu.mskim.RequestMapping;
 import model.board.BoardDao;
 
 @WebServlet(urlPatterns= {"/ajax/*"},
-initParams= {@WebInitParam(name="view",value="/view/")})
-
+ initParams= {@WebInitParam(name="view",value="/view/")})
 public class AjaxController extends MskimRequestMapping{
-	@RequestMapping("select")
-	public String select(HttpServletRequest request, HttpServletResponse response) {
-	    String level = request.getParameter("level");
-	    String si = request.getParameter("si");
-	    String gu = request.getParameter("gu");
-
-	    BufferedReader fr = null;
-	    // path : sidi.txt 파일의 절대 경로
-	    String path = request.getServletContext().getRealPath("/") + "file/sido.txt";
-	    // LinkedHashSet : 중복불가. 순서유지. 인덱스 사용불가
-	    Set<String> set = new LinkedHashSet<>();
-
-	    try {
-	        fr = new BufferedReader(new FileReader(path));
-	        String data;
-	        while ((data = fr.readLine()) != null) {
-	        	// \\s+ : 정규식표현. 공백한개 이상
-	            String[] arr = data.split("\\s+");
-	            if (arr.length < 3) continue;
-
-	            switch (level) {
-	                case "si":
-	                    set.add(arr[0].trim());
-	                    break;
-	                case "gu":
-	                	// arr[0].equals(si) : 시도와 선택한 값이 같은 경우
-	                    if (arr[0].equals(si)) set.add(arr[1].trim());
-	                    break;
-	                case "dong":
-	                	if (arr[0].equals(si) && arr[1].equals(gu)) {
-	                        String dong = arr[2].trim();
-	                        // 구군과 이름이 같은 경우 제외
-	                        if (!dong.equals(arr[1].trim())) {
-	                            set.add(dong);
-	                        }
-	                    }
-	                    break;
-	            }
-	        }
-	        fr.close();
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	    }
-
-	    request.setAttribute("list", new ArrayList<>(set));
-	    request.setAttribute("len", set.size());
-
-	    // select.jsp 호출 (문자열 배열 형태로 출력)
-	    return "ajax/select";
+  //@RequestMapping("select")
+  public String select (HttpServletRequest request,HttpServletResponse response) {
+	BufferedReader fr = null;
+	//path : sido.txt 파일의 절대 경로
+	String path =request.getServletContext().getRealPath("/")+ "file/sido.txt";
+	try {
+		fr = new BufferedReader(new FileReader(path));
+	}catch (IOException e) {
+		e.printStackTrace();
 	}
-	
-	// 차트 1
-	// http://localhost:8080/model2Study/ajax/graph1
-	@RequestMapping("graph1")
-	public String graph1(HttpServletRequest request, HttpServletResponse response){
-	    // [{"cnt":4,"writer":"원동인"},{"cnt":3,"writer":"테스트"},...]
-		BoardDao dao = new BoardDao();
-	    List<Map<String,Object>> list = dao.boardgraph1();
-	    // 배열시작 점
-	    StringBuilder json = new StringBuilder("[");
-	    int i=0;
-	    for(Map<String, Object> m : list) {
-	        for(Map.Entry<String,Object> me : m.entrySet()) {
-	        	// m : {cnt:4,writer:원동인}
-	            if(me.getKey().equals("cnt"))
-	            	// "cnt":4,
-	                json.append("{\"cnt\":"+me.getValue()+",");
-	            if(me.getKey().equals("writer"))
-	            	// "writer":"원동인"}
-	                json.append("\"writer\":\""+me.getValue()+"\"}");
-	        }
-	        // 마지막 요소 , 삭제처리
-	        i++;
-	        if(i < list.size()) json.append(",");
-	    }
-	    json.append("]");
-	    request.setAttribute("json", json.toString().trim());
-	    return "ajax/graph";
+	//LinkedHashSet : 중복불가. 순서유지. 인덱스사용불가 
+	Set<String> set = new LinkedHashSet<>();
+	String data = null;
+	String si = request.getParameter("si"); //구군설정
+	String gu = request.getParameter("gu"); //동리설정
+	if(si == null && gu==null) { //시도 설정. 초기상태
+		try {
+		  while((data=fr.readLine()) != null) {
+			  // \\s+ : 정규식표현. 공백한개이상
+			  String[] arr = data.split("\\s+");
+			  if(arr.length >=3) set.add(arr[0].trim());
+		  }
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+	} else if (gu == null) { //si파라미터값은 null이 아님. 시도선택=>구군설정
+		si = si.trim();
+		try {
+			while((data=fr.readLine()) != null) {
+				String[] arr = data.split("\\s+");
+				//arr[0].equals(si) : 시도와 선택한값이 같은 경우
+				if(arr.length >=3 && arr[0].equals(si) &&
+						!arr[1].contains(arr[0]))
+					set.add(arr[1].trim()); //구군 정보 설정
+			}
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+	} else if (gu != null && si!=null) {
+		si = si.trim();
+		gu = gu.trim();
+		try {
+			while((data=fr.readLine()) != null) {
+				String[] arr = data.split("\\s+");
+				if(arr.length >=3 && arr[0].equals(si) &&
+					arr[1].equals(gu) &&
+					!arr[1].contains(arr[0]) &&
+					!arr[2].contains(arr[1])) {
+					if(arr.length > 3) {
+						if(arr[3].contains(arr[1])) continue;
+						arr[2] += " " + arr[3];
+					}								
+					set.add(arr[2].trim()); //동리 정보 설정
+				}
+			}
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
 	}
-	
-	// 차트 2
-	// http://localhost:8080/model2Study/ajax/graph2
-	@RequestMapping("graph2")
-	public String graph2(HttpServletRequest request, HttpServletResponse response){
+	request.setAttribute("list", new ArrayList<String>(set));
+	request.setAttribute("len", set.size());
+	return "ajax/select";
+  }
+  @RequestMapping("select")
+  public String select2 (HttpServletRequest request,HttpServletResponse response) {
+	BufferedReader fr = null;
+	String path =request.getServletContext().getRealPath("/")+ "file/sido.txt";
+	try {
+		fr = new BufferedReader(new FileReader(path));
+	}catch (IOException e) {
+		e.printStackTrace();
+	}
+	final String si = request.getParameter("si"); //구군설정
+	final String gu = request.getParameter("gu"); //동리설정
+	List<String> list = null;
+	if(si == null && gu==null) { //시도 설정	
+	  list = fr.lines().filter(s->s.split("\\s+").length >=3)
+		.map(s->{
+			String[] arr = s.split("\\s+");
+			return arr[0];
+		}).distinct().collect(Collectors.toList());
+	} else if (gu == null) { //si파라미터값은 null이 아님
+	    list = fr.lines().filter(s->{
+	    	String arr[] = s.split("\\s+");
+	    	return arr.length >=3 && arr[0].equals(si.trim()) &&
+					!arr[1].contains(arr[0]);  
+	         })	
+	    	.map(s->{
+   			   String[] arr = s.split("\\s+");
+	    			return arr[1].trim();
+	    	 })
+	    	.distinct().collect(Collectors.toList());
+	} else if (gu != null && si!=null) {
+	    list = fr.lines().filter(s->{
+	    	String arr[] = s.split("\\s+");
+	    	return  (arr.length >=3 && arr[0].equals(si.trim()) &&
+	    			arr[1].equals(gu) &&
+	    			!arr[1].contains(arr[0]) &&
+					!arr[2].contains(arr[1])) ;  
+	         })	
+	    	.map(s->{
+   			   String[] arr = s.split("\\s+");
+   			   if(arr.length > 3) {
+				  arr[2] += " " + arr[3];
+   			   }
+	    		return arr[2].trim();
+	    	 })
+	    	.distinct().collect(Collectors.toList());
+		
+	}
+	request.setAttribute("list", list);
+	request.setAttribute("len", list.size());
+	return "ajax/select";
+  }
+  // http://localhost:8080/model2Study/ajax/graph1
+  @RequestMapping("graph1")
+  public String graph1(HttpServletRequest request, HttpServletResponse response) {
+	  //[{"cnt":9,"writer":"홍길동"},{"cnt":3,"writer":"홍길순"}, ...]
+	  BoardDao dao = new BoardDao();
+	  List<Map<String,Object>> list = dao.boardgraph1();
+//	  for(Map<String,Object> m : list) 
+//		  System.out.println(m);
+	  StringBuilder json = new StringBuilder("[");
+	  int i=0;
+	  for(Map<String, Object> m : list) {
+		  for(Map.Entry<String,Object> me : m.entrySet()) {
+			  // m : {cnt=9, writer=홍길동}
+			  if(me.getKey().equals("cnt"))
+				  json.append("{\"cnt\":"+me.getValue()+ ",");
+			  if(me.getKey().equals("writer"))
+				  json.append("\"writer\":\""+me.getValue()+ "\"}");
+		  }
+		  i++;
+		  if(i < list.size()) json.append(",");
+	  }
+	  json.append("]");
+	  request.setAttribute("json", json.toString().trim());
+	  return "ajax/graph";
+  }
+  @RequestMapping("graph2") //작성일자별 게시물등록건수 그래프를 위한 데이터 전송
+	public String graph2(HttpServletRequest request, 
+			             HttpServletResponse response) {
 		BoardDao dao = new BoardDao();
-	    List<Map<String,Object>> list = dao.boardgraph2();
-	    // 배열시작 점
+		List<Map<String, Object>> list = dao.boardgraph2();
 		StringBuilder json = new StringBuilder("[");
-		int i=0;
-		for(Map<String, Object> m : list) {
-		    for(Map.Entry<String,Object> me : m.entrySet()) {
-		
-		        if(me.getKey().equals("today"))
-		            json.append("{\"today\":\""+me.getValue()+"\",");
-		        if(me.getKey().equals("cnt"))
-		
-		            json.append("\"cnt\": " +me.getValue()+"}");
-		    }
-		    // 마지막 요소 , 삭제처리
-		    i++;
-		    if(i < list.size()) json.append(",");
+		int i = 0;
+		for (Map<String, Object> m : list) {
+		  for (Map.Entry<String, Object> me : m.entrySet()) {
+			if (me.getKey().equals("regdate"))
+				json.append("{\"regdate\":\"" + me.getValue() + "\",");
+			if (me.getKey().equals("cnt"))
+				json.append("\"cnt\":" + me.getValue() + "}");
+		  }
+		  i++;
+		  if (i < list.size())	json.append(",");
 		}
 		json.append("]");
-	    request.setAttribute("json", json.toString().trim());
-	    return "ajax/graph2";
+		request.setAttribute("json", json.toString().trim());
+		return "ajax/graph"; 
 	}
-	
-	
-	
-	
-	
+  
 }

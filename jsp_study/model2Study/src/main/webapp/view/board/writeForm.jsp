@@ -29,7 +29,7 @@
 				</tr>
 				<tr>
 					<td>내용</td>
-					<td><textarea rows="15" name="content" class="form-control" id="content"></textarea></td>
+					<td><textarea rows="15" name="content" class="form-control" id="summernote"></textarea></td>
 				</tr>
 				<tr><td>첨부파일</td><td><input type="file" name="file1"></td></tr>
 				<tr>
@@ -58,6 +58,38 @@
 					return;
 				}
 				f.submit(); // submit 발생 => fromd의 action 페이지로 요청
+			}
+		</script>
+		<%-- summernote 관련 구현  --%>
+		<script type="text/javascript">
+			$(function(){
+				$("#summernote").summernote({
+					height:300,
+					callbacks : {
+						onImageUpload : function(files){
+							sendFile(files[i]);
+							
+						}
+					}
+					
+				})	
+			})
+			function sendFile(files){
+				let data = new FormData(); // 폼데이터를 수집하고 전송가능한 객체. 파일 업로드에 사용됨.
+				data.append("file",file);
+				$.ajax({
+					url : "${path}/uploadImage",
+					type : "post",
+					data : data,
+					processData : false,
+					contentType : false,
+					success : function(url){
+						$("#summernote").summernote("insertImage",url);
+					},
+					error : function(e){
+						alert("이미지 업로드 실패 : " + e.status);
+					}
+				})
 			}
 		</script>
 	</body>
