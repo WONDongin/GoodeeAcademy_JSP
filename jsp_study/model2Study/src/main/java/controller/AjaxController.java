@@ -109,28 +109,26 @@ public class AjaxController extends MskimRequestMapping{
 		BoardDao dao = new BoardDao();
 	    List<Map<String,Object>> list = dao.boardgraph2();
 	    // 배열시작 점
-	    StringBuilder json = new StringBuilder("[");
-	    int i=0;
-	    for(Map<String, Object> m : list) {
-	        for(Map.Entry<String,Object> me : m.entrySet()) {
-
-	            if(me.getKey().equals("today"))
-	                json.append("{\"today\":\""+me.getValue()+"\",");
-	            if(me.getKey().equals("cnt"))
-
-	                json.append("\"cnt\": " +me.getValue()+"}");
-	        }
-	        // 마지막 요소 , 삭제처리
-	        i++;
-	        if(i < list.size()) json.append(",");
-	    }
-	    json.append("]");
+		StringBuilder json = new StringBuilder("[");
+		int i=0;
+		for(Map<String, Object> m : list) {
+		    for(Map.Entry<String,Object> me : m.entrySet()) {
+		
+		        if(me.getKey().equals("today"))
+		            json.append("{\"today\":\""+me.getValue()+"\",");
+		        if(me.getKey().equals("cnt"))
+		
+		            json.append("\"cnt\": " +me.getValue()+"}");
+		    }
+		    // 마지막 요소 , 삭제처리
+		    i++;
+		    if(i < list.size()) json.append(",");
+		}
+		json.append("]");
 	    request.setAttribute("json", json.toString().trim());
 	    return "ajax/graph2";
 	}
 	
-	
-
 	
 	
 	

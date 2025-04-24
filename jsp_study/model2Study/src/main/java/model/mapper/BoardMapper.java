@@ -85,7 +85,7 @@ public interface BoardMapper {
 	Map<컬럼명, 컬럼값> 형태로 db에서 읽어서 전달
 	{"writer":"홍길동", "cnt":9}...
 	*/
-	
+	// 차트 2
 	@Select("select DATE_FORMAT(regdate, '%Y년 %m월 %d일') today, count(*) cnt from board"
 			+ "	group by today"
 			+ "	order by 1 desc"

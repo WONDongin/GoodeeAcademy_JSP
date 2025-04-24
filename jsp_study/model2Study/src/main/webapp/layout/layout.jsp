@@ -224,7 +224,7 @@
 		
     }
     
-    
+    // 차트 1
     function pieGraphPrint(data){
 		let rows = JSON.parse(data); // 서버에서 JSON 형태로 데이터 전송
 		let writers = [] // 작성자 목록. 라벨값
@@ -294,6 +294,15 @@
 					display:true,
 					text : '게시글 작성자별 등록 건수(최대 5명)',
 					position:"bottom"
+				},
+				scales : {					
+					yAxes : [{
+						// 차트 0부터 시작
+						ticks: { 
+							beginAtZero: true,
+							precision: 0
+						}
+					}]				
 				}
 			}
 		}
