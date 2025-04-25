@@ -3,7 +3,7 @@
 <%@page import="model.member.MemberDao"%>
 <%@page import="model.member.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>\
+    pageEncoding="UTF-8"%>
 <%--
 =>joinForm.jsp 에서 입력된 값을 database member 테이블에 등록하기
 1. 파라미터 값을 Member 클래스의 객체에 저장
@@ -33,10 +33,10 @@
 	String url = "joinForm.jsp";
 	
 	// boolean insert(Member)
-	if(dao.insert(mem)){ // true : db에 등록완료
-		msg = "회원가입성공";
-		url = "loginForm.jsp"; // 다음 페이지를 설정
-	}
+if(dao.insert(mem)){ // true : db에 등록완료
+	msg = "회원가입성공";
+	url = "loginForm.jsp"; // 다음 페이지를 설정
+}
 %>
 
 <%-- 3 --%>

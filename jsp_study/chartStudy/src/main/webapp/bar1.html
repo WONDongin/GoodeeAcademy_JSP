@@ -5,35 +5,35 @@
 	<title>간단한 막대 그래프 작성(chart.js)</title>
 	</head>
 	<body>
-		<div>
-			<canvas id="myChart"></canvas>
-		</div>
-		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
-		<script type="text/javascript">
-			const ctx = document.querySelector("#myChart"); // canvas 객체
-		  	new Chart(ctx, {
-		  	type: "bar",
-		    data: {
-		    	labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'], //x 축값
-		     	datasets: [{
-		        label: "# of votes1",
-		        data: [12, 19, 3, 5, 2, 3],
-		        borderWidth: 1,
-		        backgroundColor: ["red", "blue", "yellow", "green", "purple", "orange"]
-			},
-		    {
-				label: "# of votes2",
-				data: [5, 9, 1, 10, 15, 3],
-			    borderWidth: 1,
-			    backgroundColor: ["red", "blue", "yellow", "green", "purple", "orange"]
-			}]
-		    },
-		    options: {
-		 		scales: {y: {beginAtZero: true}},
-		 		legend: {position: "right"}
-		    }
-		  });
-		</script>
+<div>
+	<canvas id="myChart"></canvas>
+</div>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+<script type="text/javascript">
+	const ctx = document.querySelector("#myChart"); // canvas 객체
+	  	new Chart(ctx, {
+	  	type: "bar",
+	    data: {
+	    	labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'], //x 축값
+	     	datasets: [{
+	        label: "# of votes1",
+	        data: [12, 19, 3, 5, 2, 3],
+	        borderWidth: 1,
+	        backgroundColor: ["red", "blue", "yellow", "green", "purple", "orange"]
+		},
+	    {
+			label: "# of votes2",
+			data: [5, 9, 1, 10, 15, 3],
+		    borderWidth: 1,
+		    backgroundColor: ["red", "blue", "yellow", "green", "purple", "orange"]
+		}]
+	    },
+	    options: {
+	 		scales: {y: {beginAtZero: true}},
+	 		legend: {position: "right"}
+	    }
+  	});
+</script>
 
 	</body>
 </html>

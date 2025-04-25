@@ -25,23 +25,21 @@
 					</td>
 				
 					<th>아이디</th>
-					<td><input type="text" name="id">
+					<td>
+						<input type="text" name="id">
 						<button type="button" onclick="inchk()">중복검색</button>
 					</td>
 				</tr>
-				<tr>
-					<th>비밀번호</th><td><input type="password" name="pass"></td>
-				</tr>
-				<tr>
-					<th>이름</th><td><input type="text" name="name"></td>
-				</tr>
+				<tr><th>비밀번호</th><td><input type="password" name="pass"></td></tr>
+				<tr><th>이름</th><td><input type="text" name="name"></td></tr>
 				<tr><th>성별</th>
-				<td>
-					<label for="gender1">남</label>
-					<input type="radio" id="gender1" name="gender" value="1">
-					<label for="gender2">여</label>
-					<input type="radio" id="gender2" name="gender" value="2">
-				</td></tr>
+					<td>
+						<label for="gender1">남</label>
+						<input type="radio" id="gender1" name="gender" value="1">
+						<label for="gender2">여</label>
+						<input type="radio" id="gender2" name="gender" value="2">
+					</td>
+				</tr>
 				<tr><th>전화번호</th><td colspan="2"><input type="text" name="tel"></td></tr>
 				<tr><th>이메일</th><td colspan="2"><input type="text" name="email"></td></tr>
 				<%-- button 태그의 기본 type은 submit임. --%>

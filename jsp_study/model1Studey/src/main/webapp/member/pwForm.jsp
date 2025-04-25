@@ -13,7 +13,7 @@
 <title>비밀번호찾기</title>
 <link rel="stylesheet" href="../css/main.css">
 </head><body><h3>비밀번호찾기</h3>
-<form action="pw.jsp" method="post"onsubmit="return input_check(this)">
+<form action="pw.jsp" name="f" method="post"onsubmit="return input_check(this)">
   <table>
      <tr><th>아이디</th><td><input type="text" name="id"></td></tr>
      <tr><th>이메일</th><td><input type="text" name="email"></td></tr>

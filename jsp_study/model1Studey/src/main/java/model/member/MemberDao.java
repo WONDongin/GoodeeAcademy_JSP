@@ -156,27 +156,27 @@ public class MemberDao {
 		
 	}
 	
-	public String pwSearch(String id, String email, String tel) {
-		Connection conn = DBConnection.getConnection();
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		String sql = "select pass from member where id=? and email=? and tel =?";
-		try {
-			pstmt = conn.prepareStatement(sql); // sql 실행
-			pstmt.setString(1, id);    // id 값 비교
-			pstmt.setString(2, email); // email 값 비교
-			pstmt.setString(3, tel);   // tel 값 비교
-			rs = pstmt.executeQuery(); // sql 문 결과값
-			if(rs.next()) { 		   // true : 레코드 찾기 성공
-				return rs.getString("pass"); // pass 값을 리턴
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			DBConnection.close(conn, pstmt, rs);
+public String pwSearch(String id, String email, String tel) {
+	Connection conn = DBConnection.getConnection();
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	String sql = "select pass from member where id=? and email=? and tel =?";
+	try {
+		pstmt = conn.prepareStatement(sql); // sql 실행
+		pstmt.setString(1, id);    // id 값 비교
+		pstmt.setString(2, email); // email 값 비교
+		pstmt.setString(3, tel);   // tel 값 비교
+		rs = pstmt.executeQuery(); // sql 문 결과값
+		if(rs.next()) { 		   // true : 레코드 찾기 성공
+			return rs.getString("pass"); // pass 값을 리턴
 		}
-		return null;
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		DBConnection.close(conn, pstmt, rs);
 	}
+	return null;
+}
 	
 	public boolean updatePass(String id, String pass) {
 		Connection conn = DBConnection.getConnection();
@@ -196,28 +196,4 @@ public class MemberDao {
 		return false;
 		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	 
 }

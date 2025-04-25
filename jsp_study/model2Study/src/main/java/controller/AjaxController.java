@@ -15,6 +15,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
 import gdu.mskim.MskimRequestMapping;
 import gdu.mskim.RequestMapping;
 import model.board.BoardDao;
@@ -183,4 +188,46 @@ public class AjaxController extends MskimRequestMapping{
 		return "ajax/graph"; 
 	}
   
+  	@RequestMapping("exchange")
+  	public String exchange(HttpServletRequest request, HttpServletResponse response) {
+  		Document doc = null;
+  		List<List<String>> trlist = new ArrayList<>();
+  		String url = "https://www.koreaexim.go.kr/wg/HPHKWG057M01";
+  		String exdate = null;
+  		try {
+  		    doc = Jsoup.connect(url).get();
+  		    // tr 요소만 가져온다.
+  		    Elements trs = doc.select("tr");
+  		    // 조회 기준일 정보
+  		    exdate = doc.select("p.table-unit").html();
+  		    // 환율정보
+  		    for(Element tr : trs) {
+  		        List<String> tdlist = new ArrayList<>();
+  		        Elements tds = tr.select("td");
+  		        for(Element td : tds) {
+  		            tdlist.add(td.html());
+  		        }
+  		        // 0:통화코드, 1:통화명, 2:받으실때, 3:보내실때
+  		        if (tdlist.size() > 0) { // 4개의 통화만 선택
+  		            if(tdlist.get(0).equals("USD") || tdlist.get(0).equals("CNH")
+  		            || tdlist.get(0).equals("JPY(100)")
+  		            || tdlist.get(0).equals("EUR")) {
+  		               trlist.add(tdlist); 
+  		            }
+  		        }
+  		    }
+  		} catch (IOException e) {
+			e.printStackTrace();
+		}
+  		request.setAttribute("date", exdate);
+  		request.setAttribute("list", trlist);
+  		return "ajax/exchange";
+  	}
+  	
+  	@RequestMapping("exchange_n")
+  	public String exchange_n(HttpServletRequest request, HttpServletResponse response) {
+  		
+  		
+  		
+  	}
 }

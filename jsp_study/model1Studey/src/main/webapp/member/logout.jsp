@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%-- 
 1. session 의 login 정보제거
-2. loginForm.jsp 페이지 이도
+2. loginForm.jsp 페이지 이동
 
 --%>
 <%
