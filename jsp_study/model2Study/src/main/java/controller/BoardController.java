@@ -17,11 +17,14 @@ import gdu.mskim.MskimRequestMapping;
 import gdu.mskim.RequestMapping;
 import model.board.Board;
 import model.board.BoardDao;
+import model.comment.Comment;
+import model.comment.CommentDao;
 
 @WebServlet(urlPatterns= {"/board/*"},
     initParams= {@WebInitParam(name="view",value="/view/")})
 public class BoardController extends MskimRequestMapping{
 	private BoardDao dao = new BoardDao();
+	private CommentDao commdao = new CommentDao();
 	
 	public String noticecheck (HttpServletRequest request,
 			HttpServletResponse response) {
@@ -112,22 +115,22 @@ public class BoardController extends MskimRequestMapping{
 		//boardid값을 session에등록
 		request.getSession().setAttribute("boardid", boardid);
 		boardid = (String)request.getSession().getAttribute("boardid");
-		
-		/* 검색관련 파라미터 추가하기 : column, find */
+		/*
+		 * 검색관련 파라미터 추가하기 : column, find
+		 */
 		String column = request.getParameter("column");
 		String find = request.getParameter("find");
-		/* 
-		column 과 find 값은 두개가 동시에 존재해야 한다. 
-		하나만 파라미터값으로 존재하면
-		두개의 파라미터가 없는 것으로 설정하기  
-		*/
-		if(column == null || column.trim().equals("") || find == null || find.trim().equals("")) {
+		/*
+		 * column과 find 값은 두개가 동시에 존재해야함. 하나만 파라미터값으로 존재하면 
+		 * 두개의 파라미터가 없는 것으로 설정하기
+		 */
+		if(column == null || column.trim().equals("") ||
+		   find == null || find.trim().equals("")) {
 			column = null;
 			find = null;
 		}
 		int limit = 10; //페이지당 출력되는 게시물의 건수
 		int boardcount = dao.boardCount(boardid,column,find); //등록된 게시물 건수
-		
 		//pageNum에 해당하는 게시물목록을 최대 10를 db에서 조회
 		List<Board> list = dao.list(boardid,pageNum,limit,column,find);
 	    int maxpage = (int)((double)boardcount/limit + 0.95);
@@ -189,16 +192,22 @@ public class BoardController extends MskimRequestMapping{
 	@RequestMapping("info")
 	public String info(HttpServletRequest request ,HttpServletResponse response) {
 	  int num = Integer.parseInt(request.getParameter("num"));
+	  String readcnt = request.getParameter("readcnt");
 //	  String boardid = (String)request.getSession().getAttribute("boardid");
 //	  if(boardid == null) boardid="1";
 	  //b : num값의 게시물 데이터 저장
 	  Board b = dao.selectOne(num);
-      dao.readcntAdd(num);  //조회수 증가
+	  //readcnt 파라미터의 값이 "f"인 경우 조회수 증가 안함
+	  if(readcnt == null || !readcnt.trim().equals("f"))
+         dao.readcntAdd(num);  //조회수 증가
       String boardid = b.getBoardid();
 	  String boardName = "공지사항";
 	  if(boardid.equals("2")) boardName = "자유게시판";
+	  //댓글 목록 조회
+	  List<Comment> commlist = commdao.list(num);
 	  request.setAttribute("b",b);
 	  request.setAttribute("boardName",boardName);
+	  request.setAttribute("commlist",commlist); //댓글 목록 view로 전달
 	  return "board/info";
 	}
 	@RequestMapping("replyForm")
@@ -358,6 +367,35 @@ public class BoardController extends MskimRequestMapping{
 	   request.setAttribute("url", url); 
 		return "alert";
 	}
-	
-	
+	@RequestMapping("comment")
+	public String comment
+	    (HttpServletRequest request, HttpServletResponse response) {
+		Comment comm = new Comment();
+		comm.setNum(Integer.parseInt(request.getParameter("num")));
+		comm.setWriter(request.getParameter("writer"));
+		comm.setContent(request.getParameter("content"));
+		int seq = commdao.maxseq(comm.getNum());
+		comm.setSeq(++seq);
+		if(commdao.insert(comm) ) {
+			return "redirect:info?num="+comm.getNum()+"&readcnt=f";
+		}
+		request.setAttribute("msg", "답글 등록시 오류 발생");
+		request.setAttribute("url", "info?num="+comm.getNum()+"&readcnt=f");
+		return "alert";
+	}
+	/* 삭제는 누구든지 삭제 가능 : 수정 필요함
+	 *  비밀번호를 입력, 로그인 정보로 판단이 필요함. 추가 필요함*/
+	@RequestMapping("commdel")
+	public String commdel 
+	        (HttpServletRequest request, HttpServletResponse response) {
+		int num = Integer.parseInt(request.getParameter("num"));
+		int seq = Integer.parseInt(request.getParameter("seq"));
+		String url = "info?num="+num+"&readcnt=f";
+		if(commdao.delete(num,seq)) {
+			return "redirect:" + url;
+		}
+		request.setAttribute("msg","답글 삭제시 오류발생");
+		request.setAttribute("url", url);
+		return "alert";	
+	}
 }
