@@ -10,5 +10,8 @@ GoodeeAcademy_ Boot Camp_JSP
 - 3주차 : mybati, ajax, JSON 
 - 4주차 : 팀프로젝트(LMS), 댓글, 모델링(개념/물리적), 정규화, GitHub
 
+## 세미 프로젝트
+- LMS(대학 학사관리 시스템)
+
 ## Blog
 [https://dongin97.tistory.com/](https://dongin97.tistory.com)
